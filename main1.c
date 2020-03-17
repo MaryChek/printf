@@ -88,46 +88,47 @@ int		ft_printf(const char *format, ...)
 	return (i);
 }
 
-int		main()
-{
-	char	*types;
-// // 	// char	c;
+// int		main()
+// {
+// 	char	*types;
+// // // 	// char	c;
 
-// // 	// c = '0';
-// // 	// types = "abcdefghijkl";
-// // 	// static char *s_hidden = "hi low\0don't print me lol\0";
-// // 	// int *t = &c;
-// // 	// printf("test1 %d\n", ft_printf("%-7i", 0));
+// // // 	// c = '0';
+// // // 	// types = "abcdefghijkl";
+// // // 	// static char *s_hidden = "hi low\0don't print me lol\0";
+// // // 	// int *t = &c;
+// // // 	// printf("test1 %d\n", ft_printf("%-7i", 0));
 
-	// test_unsig_int_arg1(4587);
-	// test_unsig_int_arg2(4587);
-	// test_int_arg1(0);
-	// test_int_arg2(0);
-	double dub = 858248238237248934834899.94848383;
-	double dub2 =			 858248238237248932282368.000000;
-	printf("\n%d\n", printf("%f", dub2));
-	// printf("\n%d\n", ft_printf("this %u number", 17));
-	// printf("\n%d", printf("@moulitest: %#.x %#.0x", 0, 0));
-	// int *b = &a;
-	// ft_printf("%020p\n", &a10);
-	// printf("%020p\n", &a10);
-	// printf("%X\n",b);
-	// printf("test my %d\n", printf("%.6p", types));
-	// printf("test my %d\n", ft_printf("%.6i", -3));
-	// printf("test2 %d\n", ft_printf("%-7.5d\n", -1234567));
-	// printf("%d\n", printf("%#010.5o\n", 1254));
-	// printf("%d\n", printf("%0#10.5o\n", 1254));
-	// // printf("test2 %d\n", ft_printf("%d\n", H));
-	// printf("%d\n", printf("%# 10.5o\n", 1254));
-	// printf("%d\n", printf("% #10.5o\n", 1254));
-	// // printf("%d\n", ft_printf("print %-0006.05s, %0006s\n", types, types));
-	// printf("%d\n", printf("%#+10.5o\n", 1254));
-	// printf("%d\n", printf("%+#10.5o\n", 1254));
-	// // printf("%d\n", ft_printf("%5%3%4%4%2%"));
-	// printf("%d\n", printf("%#-10.5o\n", 1254));
-	// printf("%d\n", printf("%-#10.5o\n", 1254));
-	// printf("%d\n", printf("%d\n", printf("%-10s is a string\n", "")));
-	// printf("%#.5o", 5263);
-	// ft_printf("%#.5o", 5263);
-	return (0);
-}
+// 	// test_unsig_int_arg1(4587);
+// 	// test_unsig_int_arg2(4587);
+// 	// test_int_arg1(0);
+// 	// // test_int_arg2(0);
+// 	// double dub = 858248238237248934834899.94848383;
+// 	// double dub2 =			 858248238237248932282368.000000;
+// 	printf("\n%d\n", printf("%f", dub2));
+
+// 	// printf("\n%d\n", ft_printf("this %u number", 17));
+// 	// printf("\n%d", printf("@moulitest: %#.x %#.0x", 0, 0));
+// 	// int *b = &a;
+// 	// ft_printf("%020p\n", &a10);
+// 	// printf("%020p\n", &a10);
+// 	// printf("%X\n",b);
+// 	// printf("test my %d\n", printf("%.6p", types));
+// 	// printf("test my %d\n", ft_printf("%.6i", -3));
+// 	// printf("test2 %d\n", ft_printf("%-7.5d\n", -1234567));
+// 	// printf("%d\n", printf("%#010.5o\n", 1254));
+// 	// printf("%d\n", printf("%0#10.5o\n", 1254));
+// 	// // printf("test2 %d\n", ft_printf("%d\n", H));
+// 	// printf("%d\n", printf("%# 10.5o\n", 1254));
+// 	// printf("%d\n", printf("% #10.5o\n", 1254));
+// 	// // printf("%d\n", ft_printf("print %-0006.05s, %0006s\n", types, types));
+// 	// printf("%d\n", printf("%#+10.5o\n", 1254));
+// 	// printf("%d\n", printf("%+#10.5o\n", 1254));
+// 	// // printf("%d\n", ft_printf("%5%3%4%4%2%"));
+// 	// printf("%d\n", printf("%#-10.5o\n", 1254));
+// 	// printf("%d\n", printf("%-#10.5o\n", 1254));
+// 	// printf("%d\n", printf("%d\n", printf("%-10s is a string\n", "")));
+// 	// printf("%#.5o", 5263);
+// 	// ft_printf("%#.5o", 5263);
+// 	return (0);
+// }

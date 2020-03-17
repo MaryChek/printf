@@ -4,13 +4,13 @@ void	ft_parse_size(const char *format, t_type *type)
 {
 	if (format[0] == 'h' && format[1] != 'h')
 		type->size = H;
-	if (format[0] == 'h' && format[1] == 'h')
+	else if (format[0] == 'h' && format[1] == 'h')
 		type->size = HH;
-	if (format[0] == 'l' && format[1] != 'l')
+	else if (format[0] == 'l' && format[1] != 'l')
 		type->size = L;
-	if (format[0] == 'l' && format[1] == 'l')
+	else if (format[0] == 'l' && format[1] == 'l')
 		type->size = LL;
-	if (format[0] == 'L')
+	else if (format[0] == 'L')
 		type->size = L_big;
 }
 
@@ -64,26 +64,31 @@ int		ft_parse_format(const char *format, t_type *type)
 	return (count_skip);
 }
 
+int		ft_type(const char *format)
+{
+	if (*format == 'd' || *format == 'i' || *format == 'u' 
+		|| *format == 'o' || *format == 'x' || *format == 'X' 
+		|| *format == 'f' || *format == 'c' || *format == 'p'
+		 || *format == 'e' || *format == 'g' || *format == 's' 
+		|| *format == '%')
+		return (1);
+	else
+		return (0);
+}
+
 int		ft_parse_type(const char *format, t_type *type)
 {
 	int		i;
-	int		j;
 
-	j = 0;
 	i = 0;
-	while (format[i] && format[i] != type->types[j])
+	while (format[i] && !ft_type(&format[i]))
 	{
-		while (type->types[j] && format[i] != type->types[j])
-			j++;
-		if (type->types[j] == '\0')
-		{
+		if (!ft_type(&format[i]))
 			i += ft_parse_format(&format[i], type);
-			j = 0;
-		}
 	}
-	if (format[i] == type->types[j])
+	if (ft_type(&format[i]))
 	{
-		type->type = type->types[j];
+		type->type = format[i];
 		return (i);
 	}
 	return (-1);
