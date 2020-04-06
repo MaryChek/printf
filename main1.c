@@ -51,7 +51,7 @@ void	ft_print_format(t_type *type)
 	else if (type->type == 's')
 		type->print += ft_print_string(va_arg(type->vl, char*), *type);
 	else if (type->type == 'p')
-		type->print += ft_print_pointer(va_arg(type->vl, void*), *type);
+		type->print += ft_print_pointer(va_arg(type->vl, void *), *type);
 }
 
 void	ft_clean_struct(t_type *type)
@@ -88,6 +88,12 @@ int		ft_printf(const char *format, ...)
 	return (i);
 }
 
+
+int		main()
+{
+	printf("%f\n", 0.0);
+	ft_printf("%f\n", 0.0);
+}
 // int		main()
 // {
 // 	char	*types;

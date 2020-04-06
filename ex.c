@@ -2,30 +2,23 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <limits.h>
+# include "ft_printf.h"
 
-
-int     main() {
+int     main() 
+{
     __uint128_t bit;
-    double c = 10.0;
+    double c = -127800000000000000000000000000000000000000000.0;
+    //printf("%f\n", c);
     bit = *(__uint128_t *)(&c);
     int exp = ((bit >> 52) & 0x7ff) - 1023;
-    printf("exp = %d\n", exp);
+    //printf("exp = %d\n", exp);
     int sign;
-    sign = bit >> 63;
-    if (sign == 0)
+    sign = (bit >> 63) & 1;
+    /*if (sign == 0)
         printf("sign = +\n");
     else
-        printf("sign = -\n");
-    int a = 51;
-    printf("integ part = 1");
-    while (exp-- > 0)
-    {
-        if ((bit >> a) & 1)
-            printf("1");
-        else
-            printf("0");
-        a--;
-    }
+        printf("sign = -\n");*/
+    print_integ_part(&exp, bit, &sign);
     printf("\n");
     int i = 63;
     while (i >= 0)

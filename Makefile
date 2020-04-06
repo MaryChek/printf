@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 LIBFTA = libft.a
 
-SRCS = main1.c print_format.c ft_skip.c ft_parse.c ft_print_int.c ft_print_unsig_int.c
+SRCS = float_integ_part.c main1.c long_arithmetic.c print_format.c ft_skip.c ft_parse.c ft_print_int.c ft_print_unsig_int.c print_function.c
 
 OBJ = $(SRCS:.c=.o)
 

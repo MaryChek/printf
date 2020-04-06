@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int n, int count_zero)
 {
 	char			*str;
 	size_t			max;
 	unsigned int	i;
 
-	max = ft_intlen(n);
+	max = ft_intlen(n) + count_zero;
 	if (n < 0)
 	{
 		i = (unsigned int)(n * (-1));
@@ -28,11 +28,14 @@ char	*ft_itoa(int n)
 		i = (unsigned int)(n);
 	if (!(str = ft_strnew(max)))
 		return (NULL);
-	while (max)
+	while (i > 10)
 	{
 		str[--max] = (i % 10) + 48;
-		i = i / 10;
+		i /= 10;
 	}
+    str[--max] = (i % 10) + 48;
+	while (count_zero--)
+		str[--max] = '0';
 	if (n < 0)
 		str[0] = '-';
 	return (str);

@@ -19,7 +19,7 @@ int		print_spase(t_type *type, const LL_int *elem)
 		if ((type->precision < 0 && type->f_null) && !type->f_minus)
 			type->count_zero += i;
 		else
-			count += print_n_char(i, ' ');
+			count += ft_print_n_char(i, ' ');
 	}
 	return (count);
 }
@@ -35,21 +35,21 @@ int		print_precision_and_elem(t_type *type, const LL_int *elem)
 	if (*elem > 0 || (type->precision && !*elem))
 	{
 		if (type->f_plus)
-			count += print_n_char(1, '+');
+			count += ft_print_n_char(1, '+');
 		else if (type->f_space)
-			count += print_n_char(1, ' ');
+			count += ft_print_n_char(1, ' ');
 	}
 	if (i > 0)
 		type->count_zero += i;
 	if (type->precision || *elem)
 	{
-		ft_putstr((str = ft_itoa_base(*elem, 10, type->count_zero)));
+		ft_putstr_fd((str = ft_itoa_base(*elem, 10, type->count_zero)), 1);
 		ft_strdel(&str);
 	}
 	if (!*elem && !type->precision)
 		if (type->f_plus || type->f_space || type->f_minus || type->f_null
 		|| (!type->f_plus && !type->f_space && !type->f_minus && type->width))
-			count += print_n_char(1, type->f_plus ? '+' : ' ');
+			count += ft_print_n_char(1, type->f_plus ? '+' : ' ');
 	return (count + type->count_zero);
 }
 
