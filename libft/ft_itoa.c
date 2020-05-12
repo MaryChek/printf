@@ -18,17 +18,14 @@ char	*ft_itoa(int n, int count_zero)
 	size_t			max;
 	unsigned int	i;
 
-	max = ft_intlen(n) + count_zero;
+	max = ft_intlen(n) + count_zero + (n < 0 ? 1 : 0);
 	if (n < 0)
-	{
 		i = (unsigned int)(n * (-1));
-		max++;
-	}
 	else
 		i = (unsigned int)(n);
 	if (!(str = ft_strnew(max)))
 		return (NULL);
-	while (i > 10)
+	while (i >= 10)
 	{
 		str[--max] = (i % 10) + 48;
 		i /= 10;

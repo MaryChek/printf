@@ -85,7 +85,7 @@ void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
+int					ft_putnbr_fd(int n, int fd);
 
 size_t				ft_word(const char *s, char c);
 size_t				ft_letter(const char *s, char c, size_t i);
@@ -97,5 +97,6 @@ char				*ft_itoa_base(LL_int value, int base, int num);
 char				*ft_itoa_unsig_base(ULL_int value, int base, int num, int reg);
 int					ft_atoi_base(const char *nbr, unsigned int base);
 size_t				ft_base_intlen(ULL_int n, int base);
+int					ft_put_n_line_char(char const *s, int n);
 
 #endif

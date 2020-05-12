@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 LIBFTA = libft.a
 
-SRCS = float_integ_part.c main1.c long_arithmetic.c print_format.c ft_skip.c ft_parse.c ft_print_int.c ft_print_unsig_int.c print_function.c
+SRCS = ft_print_float.c main1.c long_arithmetic.c print_format.c ft_skip.c ft_parse.c ft_print_int.c ft_print_unsig_int.c print_function.c
 
 OBJ = $(SRCS:.c=.o)
 
@@ -28,7 +28,7 @@ clean:
 	@echo OBJECTS FILES HAS BEEN DELETED.
 
 test:
-	gcc main1.c print_format.c ft_skip.c ft_parse.c ft_atoi.c ft_print_int.c ft_unsig_int.c test_unsig_int.c test_int.c -L libft -lft -g
+	gcc ft_print_float.c main1.c long_arithmetic.c print_format.c ft_skip.c ft_parse.c ft_print_int.c ft_print_unsig_int.c print_function.c -L libft -lft -g
 
 fclean: clean
 	@/bin/rm -f $(NAME)

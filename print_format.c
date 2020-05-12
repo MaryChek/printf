@@ -1,19 +1,66 @@
 #include "ft_printf.h"
 
-int		ft_print_float(double elem, t_type type)
+int		ft_float_specifier(t_type type)
 {
-	__uint128_t	bits;
-	int 		exp;
-	int			sign;
-	int			bit;
+	t_float_param	fl_p;
+	int				sign;
 
-	bits = *(__uint128_t *)(&elem);
-	exp = ((bits >> 52) & 0x7ff) - 1023;
-    sign = (bits >> 63) & 1;
-    bit = print_integ_part(&exp, bits, &sign, &type);
-	write(1, ".", 1);
-	print_fract_part(bit, &exp, bits, &type);
-	return 0;
+	if (type.size == L_big)
+	{
+		sign = ft_proc_bits_ldub(&fl_p, va_arg(type.vl, L_Dub));
+		return (ft_print_float(fl_p, type, sign));
+	}
+	else
+	{
+		sign = ft_proc_bits_dub(&fl_p, va_arg(type.vl, double));
+		return (ft_print_float(fl_p, type, sign));
+	}
+}
+
+int		ft_proc_bits_dub(t_float_param	*float_p, double elem)
+{
+	float_p->bits = *(__uint128_t *)(&elem);
+	float_p->exp = ((float_p->bits >> 52) & 0x7ff) - 1023;
+	float_p->bit = 51;
+	float_p->lst_mbit = 52;
+	return ((float_p->bits >> 63) & 1);
+}
+
+int		ft_proc_bits_ldub(t_float_param	*float_p, L_Dub elem)
+{
+	float_p->bits = *(__uint128_t *)(&elem);
+	float_p->exp = ((float_p->bits >> 64) & 0x7fff) - 16383;
+	float_p->bit = 62;
+	float_p->lst_mbit = 64;
+	return ((float_p->bits >> 79) & 1);
+}
+
+int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
+{
+	t_long_num int_part;
+	t_long_num fr_part;
+
+    int_part.sign = int_sign;
+	fr_part.sign = 0;
+
+	/*int k = 79;// 63
+    while (k >= 0)
+    {
+        if ((float_p.bits >> k) & 1)
+            printf("1");
+        else
+            printf("0");
+        k--;
+        if (k == 78 || k == 63) //62 51
+            printf(" ");
+    }i*/
+
+    ft_creat_integ_part_num(&int_part, &float_p);
+	ft_creat_fract_part_num(&fr_part, &float_p);
+	type.precision = type.precision >= 0 ? type.precision : 6;
+	ft_roud_a_num(&int_part, &fr_part, float_p, type.precision);
+	print_int_and_fr_parts(int_part, fr_part, &type, float_p.exp);
+	return (type.print);
 }
 
 int		ft_print_char(char elem, t_type type)
@@ -49,9 +96,11 @@ int		ft_print_string(char* elem, t_type type)
 
 	count = 0;
 	if (elem != NULL)
-		str = type.precision >= 0 ? ft_strsub(elem, 0, type.precision) : elem;
+		str = type.precision >= 0 ? 
+		ft_strsub(elem, 0, type.precision) : elem;
 	else
-		str = type.precision >= 0 ? ft_strsub("(null)\0", 0, type.precision) : ft_strdup("(null)\0");
+		str = (type.precision > 5 || type.precision < 0) ? 
+		ft_strdup("(null)\0") : ft_strnew(0);
 	if (type.f_minus)
 	{
 		ft_putstr_fd(str, 1);
@@ -71,7 +120,10 @@ int		ft_print_pointer(void *elem, t_type type)
 	UL_int	a;
 
 	if (elem == NULL)
+	{
+		type.precision = 5;
 		return (ft_print_string("(nil)", type));
+	}
 	a = (UL_int)&(*elem);
 	type.type = 'x';
 	type.f_hash = 1;

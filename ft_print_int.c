@@ -59,6 +59,8 @@ int		ft_print_int(t_type type, LL_int elem)
 
 	count = 0;
 	type.length = ft_intlen(elem);
+	if (elem < 0)
+		type.length++;
 	if (type.f_minus)
 	{
 		count += print_precision_and_elem(&type, &elem);

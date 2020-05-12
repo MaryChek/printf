@@ -12,7 +12,9 @@ void	error(int x, va_list vl)
 void	ft_type_cleaning(t_type *type)
 {
 	type->width = 0;
+	type->star_w = 0;
 	type->precision = -1;
+	type->star_p = 0;
 	type->size = 0;
 	type->type = '0';
 	type->length = 0;
@@ -23,6 +25,7 @@ void	ft_type_cleaning(t_type *type)
 	type->f_hash = 0;
 	type->f_null = 0;
 	type->f_pointer = 0;
+	type->error_array = NULL;
 }
 
 void	ft_create_typestruct(t_type *type)
@@ -33,6 +36,7 @@ void	ft_create_typestruct(t_type *type)
 		error(1, type->vl);
 	ft_type_cleaning(type);
 	type->print = 0;
+	type->error = 0;
 }
 
 void	ft_print_format(t_type *type)
@@ -43,11 +47,11 @@ void	ft_print_format(t_type *type)
 	|| type->type == 'o')
 		type->print += ft_unsig_specifier(*type, va_arg(type->vl, ULL_int));
 	else if (type->type == 'f' || type->type == 'e' || type->type == 'g')
-		type->print += ft_print_float(va_arg(type->vl, double), *type);
+		type->print = ft_float_specifier(*type);
 	else if (type->type == 'c')
 		type->print += ft_print_char(va_arg(type->vl, int), *type);
 	else if (type->type == '%')
-		type->print += ft_print_char('%', *type);
+		type->print += ft_print_n_char(1, '%');
 	else if (type->type == 's')
 		type->print += ft_print_string(va_arg(type->vl, char*), *type);
 	else if (type->type == 'p')
@@ -60,6 +64,30 @@ void	ft_clean_struct(t_type *type)
 	ft_strdel(&type->sizes);
 }
 
+void	ft_print_error_arr(t_type *type)
+{
+	char 	*tmp;
+	int		fl_dod;
+
+	fl_dod = 0;
+	tmp = type->error_array;
+	type->print += ft_print_n_char(1, '%');
+	while (tmp && *tmp)
+	{
+		if (*tmp == '*' && !fl_dod && type->star_w-- > 0)
+			type->print += ft_putnbr_fd(type->width, 1);
+		else if (*tmp == '*' && fl_dod && type->star_p-- > 0)
+			type->print += ft_putnbr_fd(type->precision, 1);
+		else
+		{
+			fl_dod += (*tmp == '.') ? 1 : 0;
+			type->print += ft_print_n_char(1, *tmp);
+		}
+		tmp++;
+	}
+	ft_strdel(&(type->error_array));
+}
+
 int		ft_printf(const char *format, ...)
 {
 	t_type	type;
@@ -69,31 +97,43 @@ int		ft_printf(const char *format, ...)
 	va_start(type.vl, format);
 	ft_create_typestruct(&type);
 	while (format[++i])
-		if (format[i] == '%')
+		if (format[i] == '%' && !type.error)
 		{
 			++i;
-			i += ft_parse_type(&format[i], &type);
+		  i  += ft_parse_type(&format[i], &type);
 			if (type.type != '0')
 				ft_print_format(&type);
+			if (type.error_array && type.error == 2)
+				ft_print_error_arr(&type);
 			ft_type_cleaning(&type);
 		}
-		else
-		{
-			write(1, &format[i], 1);
-			type.print++;
-		}
+		else /*if (!type.error)*/
+			type.print += ft_print_n_char(1, format[i]);
 	va_end(type.vl);
-	i = type.print;
+	i = type.error < 0 ? -1 : type.print;
 	ft_clean_struct(&type);
 	return (i);
 }
 
-
 int		main()
 {
-	printf("%f\n", 0.0);
-	ft_printf("%f\n", 0.0);
-}
+	printf("\nprint = %d\n", printf("% ", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("% ", 5, 6));
+	printf("\nprint = %d\n", printf("%**3*d", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("%**3*d", 5, 6));
+	printf("\nprint = %d\n", printf("%*3*d", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("%*3*d", 5, 6));
+	printf("\nprint = %d\n", printf("%3*d", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("%3*d", 5, 6));
+	printf("\nprint = %d\n", printf("%**3*t", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("%**3*t", 5, 6));
+	printf("\nprint = %d\n", printf("%*3*t", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("%*3*t", 5, 6));
+	printf("\nprint = %d\n", printf("%3*t", 5, 6));
+	printf("\nmy print = %d\n\n", ft_printf("%3*t", 5, 6));
+
+}/**/
+
 // int		main()
 // {
 // 	char	*types;

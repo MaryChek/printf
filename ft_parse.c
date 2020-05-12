@@ -14,21 +14,43 @@ void	ft_parse_size(const char *format, t_type *type)
 		type->size = L_big;
 }
 
+int		ft_pars_star_wid(t_type *type, int *val)
+{
+	
+	*val =  va_arg(type->vl, int);
+	if (type->width)
+		type->error++;
+	else
+		type->star_w++;	
+	if  (!type->width && (type->width = *val) < 0)
+	{
+		type->f_minus = 1;
+		type->width *= -1;
+	}
+	return (1);	
+}
+
 int		ft_modifier_processing(t_type *type, const char *format, int count_skip)
 {
 	int		val;
 
-	if ((val = ft_atoi(&format[0])) != 0) //добавить *
+	if (!type->star_w && format[0] == '*')
+		return (ft_pars_star_wid(type, &val));
+	else if ((val = ft_atoi(&format[0])))
 	{
-		type->width = val;
-		count_skip = ft_intlen(type->width);
+		if (type->star_w)
+			type->error = 2;
+		else
+			type->width = val;		
+		return (ft_intlen(val));
 	}
 	else if (format[0] == '.')
 	{
 		count_skip += ft_zero_skip(&format[1]);
-		type->precision = ft_atoi(&(format[1]));
-		if (type->precision != 0)
-			count_skip += ft_intlen(type->precision);
+		type->precision = format[1] == '*' ?
+			va_arg(type->vl, int) : ft_atoi(&(format[1]));
+		if (type->precision > 0 || format[1] == '*')
+			count_skip += format[1] == '*' ? 1 : ft_intlen(type->precision);
 	}
 	else
 	{
@@ -86,10 +108,14 @@ int		ft_parse_type(const char *format, t_type *type)
 		if (!ft_type(&format[i]))
 			i += ft_parse_format(&format[i], type);
 	}
-	if (ft_type(&format[i]))
+	if (!type->error && ft_type(&format[i]))
 	{
 		type->type = format[i];
 		return (i);
 	}
-	return (-1);
+	if (!ft_type(&format[i]))
+		type->error = type->error ? 2 : -1;
+	if(i > 0)
+		type->error_array = ft_strsub(format, 0, i);
+	return (type->error == 1 ? -i : --i);
 }
