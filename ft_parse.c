@@ -30,27 +30,44 @@ int		ft_pars_star_wid(t_type *type, int *val)
 	return (1);	
 }
 
+int		ft_pars_star_pres(t_type *type, int *val)
+{
+	
+	*val =  va_arg(type->vl, int);
+	if (type->precision > -1)
+		type->error++;
+	else
+		type->star_p++;	
+	if (type->precision == -1)
+		type->precision = *val;
+	return (1);	
+}
+
+int     write_val(int *var, int star, int val, t_type *type)
+{
+	if (star)
+		type->error = 2;
+	else
+		*var = val;		
+	return (ft_intlen(val));
+}
+
 int		ft_modifier_processing(t_type *type, const char *format, int count_skip)
 {
 	int		val;
 
-	if (!type->star_w && format[0] == '*')
+	if (!type->dot && !type->star_w && format[0] == '*')
 		return (ft_pars_star_wid(type, &val));
-	else if ((val = ft_atoi(&format[0])))
+	else if (!type->dot && (val = ft_atoi(&format[0])))	
+		return (write_val(&type->width, type->star_w, val, type));
+	else if (format[0] == '.' || type->dot)
 	{
-		if (type->star_w)
-			type->error = 2;
-		else
-			type->width = val;		
-		return (ft_intlen(val));
-	}
-	else if (format[0] == '.')
-	{
-		count_skip += ft_zero_skip(&format[1]);
-		type->precision = format[1] == '*' ?
-			va_arg(type->vl, int) : ft_atoi(&(format[1]));
-		if (type->precision > 0 || format[1] == '*')
-			count_skip += format[1] == '*' ? 1 : ft_intlen(type->precision);
+		count_skip += ft_zero_skip(&format[type->dot ? 0 : 1]);
+		if (!type->star_p && format[type->dot ? 0 : 1] == '*')
+			return (ft_pars_star_pres(type, &val));
+		if ((val = ft_atoi(&(format[type->dot ? 0 : 1]))) > 0)
+			count_skip += write_val(&type->precision, type->star_p, val, type);
+		type->dot++;
 	}
 	else
 	{
@@ -117,5 +134,5 @@ int		ft_parse_type(const char *format, t_type *type)
 		type->error = type->error ? 2 : -1;
 	if(i > 0)
 		type->error_array = ft_strsub(format, 0, i);
-	return (type->error == 1 ? -i : --i);
+	return (type->error == 1 ? -2 : --i);
 }

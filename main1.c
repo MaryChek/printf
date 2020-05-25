@@ -26,6 +26,7 @@ void	ft_type_cleaning(t_type *type)
 	type->f_null = 0;
 	type->f_pointer = 0;
 	type->error_array = NULL;
+	type->dot = 0;
 }
 
 void	ft_create_typestruct(t_type *type)
@@ -117,7 +118,7 @@ int		ft_printf(const char *format, ...)
 
 int		main()
 {
-	printf("\nprint = %d\n", printf("% ", 5, 6));
+	/**/printf("\nprint = %d\n", printf("% ", 5, 6));
 	printf("\nmy print = %d\n\n", ft_printf("% ", 5, 6));
 	printf("\nprint = %d\n", printf("%**3*d", 5, 6));
 	printf("\nmy print = %d\n\n", ft_printf("%**3*d", 5, 6));

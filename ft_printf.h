@@ -66,6 +66,7 @@ typedef struct		s_type
 	int			count_zero;
 	int			error;
 	char		*error_array;
+	int         dot;
 }					t_type;
 
 
