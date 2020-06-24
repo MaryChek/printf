@@ -33,22 +33,22 @@ int		ft_pars_star_wid(t_type *type, int *val)
 int		ft_pars_star_pres(t_type *type, int *val)
 {
 	
-	*val =  va_arg(type->vl, int);
+	*val = va_arg(type->vl, int);
 	if (type->precision > -1)
 		type->error++;
 	else
-		type->star_p++;	
+		type->star_p++;
 	if (type->precision == -1)
 		type->precision = *val;
 	return (1);	
 }
 
-int     write_val(int *var, int star, int val, t_type *type)
+int		write_val(int *var, int star, int val, t_type *type)
 {
 	if (star)
 		type->error = 2;
 	else
-		*var = val;		
+		*var = val;
 	return (ft_intlen(val));
 }
 
@@ -58,7 +58,7 @@ int		ft_modifier_processing(t_type *type, const char *format, int count_skip)
 
 	if (!type->dot && !type->star_w && format[0] == '*')
 		return (ft_pars_star_wid(type, &val));
-	else if (!type->dot && (val = ft_atoi(&format[0])))	
+	else if (!type->dot && (val = ft_atoi(&format[0])))
 		return (write_val(&type->width, type->star_w, val, type));
 	else if (format[0] == '.' || type->dot)
 	{
@@ -69,7 +69,7 @@ int		ft_modifier_processing(t_type *type, const char *format, int count_skip)
 			count_skip += write_val(&type->precision, type->star_p, val, type);
 		type->dot++;
 	}
-	else
+	if (format[0] == 'l' || format[0] == 'L' || format[0] == 'h')
 	{
 		val = 0;
 		while (format[0] != type->sizes[val] && type->sizes[val])

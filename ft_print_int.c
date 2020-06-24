@@ -12,11 +12,11 @@ int		print_spase(t_type *type, const LL_int *elem)
 		i = type->width - type->length;
 	if (i >= 0)
 	{
-		if (((type->f_plus || type->f_space) && *elem > 0)
-		|| (*elem < 0 && (type->precision > (type->length - 1)))
-		|| ((type->f_plus || type->f_space) && *elem >= 0 && type->precision))
+		if (((type->f_plus || type->f_space) && (*elem > 0
+		|| (!*elem && (type->precision || !type->dot))))
+		|| (*elem < 0 && (type->precision > (type->length - 1))))
 			i--;
-		if ((type->precision < 0 && type->f_null) && !type->f_minus)
+		if ((!type->dot && type->f_null) && !type->f_minus)
 			type->count_zero += i;
 		else
 			count += ft_print_n_char(i, ' ');
@@ -32,7 +32,7 @@ int		print_precision_and_elem(t_type *type, const LL_int *elem)
 
 	count = 0;
 	i = type->precision - type->length + ((*elem < 0) ? 1 : 0);
-	if (*elem > 0 || (type->precision && !*elem))
+	if (*elem > 0 || ((type->precision || !type->dot) && !*elem))
 	{
 		if (type->f_plus)
 			count += ft_print_n_char(1, '+');
@@ -41,14 +41,13 @@ int		print_precision_and_elem(t_type *type, const LL_int *elem)
 	}
 	if (i > 0)
 		type->count_zero += i;
-	if (type->precision || *elem)
+	if (!type->dot || type->precision || *elem)
 	{
 		ft_putstr_fd((str = ft_itoa_base(*elem, 10, type->count_zero)), 1);
 		ft_strdel(&str);
 	}
-	if (!*elem && !type->precision)
-		if (type->f_plus || type->f_space || type->f_minus || type->f_null
-		|| (!type->f_plus && !type->f_space && !type->f_minus && type->width))
+	if (!*elem && !type->precision && type->dot)
+		if (type->f_plus || type->f_space || type->f_minus || type->f_null || (!type->f_plus && !type->f_space && !type->f_minus && type->width))
 			count += ft_print_n_char(1, type->f_plus ? '+' : ' ');
 	return (count + type->count_zero);
 }
@@ -71,7 +70,7 @@ int		ft_print_int(t_type type, LL_int elem)
 		count += print_spase(&type, &elem);
 		count += print_precision_and_elem(&type, &elem);
 	}
-	if (type.precision || (!type.precision && elem))
+	if (type.precision || !type.dot || (!type.precision && elem))
 		return (count + type.length);
 	else
 		return (count);

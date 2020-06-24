@@ -40,24 +40,24 @@ int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
 	t_long_num int_part;
 	t_long_num fr_part;
 
-    int_part.sign = int_sign;
+	int_part.sign = int_sign;
 	fr_part.sign = 0;
 
 	/*int k = 79;// 63
-    while (k >= 0)
-    {
-        if ((float_p.bits >> k) & 1)
-            printf("1");
-        else
-            printf("0");
-        k--;
-        if (k == 78 || k == 63) //62 51
-            printf(" ");
-    }i*/
+	while (k >= 0)
+	{
+		if ((float_p.bits >> k) & 1)
+			printf("1");
+		else
+			printf("0");
+		k--;
+		if (k == 78 || k == 63) //62 51
+			printf(" ");
+	}i*/
 
     ft_creat_integ_part_num(&int_part, &float_p);
 	ft_creat_fract_part_num(&fr_part, &float_p);
-	type.precision = type.precision >= 0 ? type.precision : 6;
+	type.precision = (type.precision < 0 || !type.dot) ? 6 : type.precision;
 	ft_roud_a_num(&int_part, &fr_part, float_p, type.precision);
 	print_int_and_fr_parts(int_part, fr_part, &type, float_p.exp);
 	return (type.print);
@@ -95,12 +95,10 @@ int		ft_print_string(char* elem, t_type type)
 	char	*str;
 
 	count = 0;
-	if (elem != NULL)
-		str = type.precision >= 0 ? 
-		ft_strsub(elem, 0, type.precision) : elem;
-	else
-		str = (type.precision > 5 || type.precision < 0) ? 
-		ft_strdup("(null)\0") : ft_strnew(0);
+	if (elem == NULL)
+		elem = ft_strdup("(null)\0");
+	str = (type.precision >= 0 && type.dot) ? 
+	ft_strsub(elem, 0, type.precision) : elem;
 	if (type.f_minus)
 	{
 		ft_putstr_fd(str, 1);
@@ -111,7 +109,8 @@ int		ft_print_string(char* elem, t_type type)
 		count += ft_put_space(str, type);
 		ft_putstr_fd(str, 1);
 	}
-	(type.precision >= 0 || elem == NULL) ? ft_strdel(&str) : 0;
+	if ((type.precision >= 0 && type.dot) || elem == NULL)
+		ft_strdel(&str);
 	return (count);
 }
 
@@ -119,11 +118,6 @@ int		ft_print_pointer(void *elem, t_type type)
 {
 	UL_int	a;
 
-	if (elem == NULL)
-	{
-		type.precision = 5;
-		return (ft_print_string("(nil)", type));
-	}
 	a = (UL_int)&(*elem);
 	type.type = 'x';
 	type.f_hash = 1;

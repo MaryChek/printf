@@ -23,7 +23,7 @@ int		ft_print_zero_elem(t_type *type)
 	count = 0;
 	if (type->type == 'o' && type->f_hash)
 		ft_print_n_char(1, '0');
-	else if (type->width && (type->type == 'o' || (type->type == 'x' || type->type == 'X')))
+	else if (type->width && (type->type == 'o' || type->type == 'x' || type->type == 'X'))
 		ft_print_n_char(1, ' ');
 	else if (type->f_plus || type->f_space || type->f_minus || type->f_null
 		|| (!type->f_plus && !type->f_space && !type->f_minus && type->width))
@@ -49,7 +49,7 @@ int		print_unsig_spase(t_type *type, const ULL_int *elem)
 			i -= 2;
 		if (type->f_hash && type->type == 'o' && *elem && type->precision <= type->length)
 			--i;
-		if ((type->precision < 0 && type->f_null) && !type->f_minus)
+		if ((!type->dot && type->f_null) && !type->f_minus)
 			type->count_zero += i;
 		else
 			count += ft_print_n_char(i, ' ');
@@ -66,7 +66,7 @@ int		print_unsig_precision(t_type *type, const ULL_int *elem, int base, int reg)
 	count = 0;
 	i = type->precision - type->length;
 	type->count_zero += (i > 0) ? i : 0;
-	if (type->precision || *elem || type->f_pointer)
+	if (!type->dot || type->precision > 0 || *elem || type->f_pointer)
 	{
 		if (type->f_pointer || (type->f_hash && (type->type == 'x' || type->type == 'X') && *elem))
 		{
@@ -75,13 +75,13 @@ int		print_unsig_precision(t_type *type, const ULL_int *elem, int base, int reg)
 		}
 		else if (type->f_hash && type->type == 'o' && *elem && type->precision <= type->length)
 			count += ft_print_n_char(1, '0');
-		if (!type->f_pointer || *elem || type->precision)
+		if (!type->f_pointer || *elem || type->precision || !type->dot)
 		{
 			ft_putstr_fd((str = ft_itoa_unsig_base(*elem, base, type->count_zero, reg)), 1);
 			ft_strdel(&str);
 		}
 	}
-	if (!*elem && !type->precision)
+	if (!*elem && !type->precision && type->dot)
 		ft_print_zero_elem(type);
 	return (count + type->count_zero);
 }
