@@ -116,18 +116,18 @@ int		ft_printf(const char *format, ...)
 	return (i);
 }
 
-int		main()
-{
-	int a;
-	double special;
-	*((unsigned long *)(&special)) = 9218868437227405310;
+// int		main()
+// {
+// 	int a;
+// 	double special;
+// 	*((unsigned long *)(&special)) = 9218868437227405310;
 
-	printf("\n\nTEST 0\n\n");
+// 	printf("\n\nTEST 0\n\n");
 
-	a = printf("ORIG_PRINT---->%f", special);
-	printf("|\nprint = %d(%d)\n\n", a, a - 15);
-	a = ft_printf("MY_PRINT------>%f", special);
-	printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+// 	a = printf("ORIG_PRINT---->%.*i", -6, -3);
+// 	printf("|\nprint = %d(%d)\n\n", a, a - 15);
+// 	a = ft_printf("MY_PRINT------>%.*i", -6, -3);
+// 	printf("|\nmy print = %d(%d)\n\n", a, a - 15);
 
 	// printf("\n\nTEST 1\n\n");
 
@@ -193,7 +193,7 @@ int		main()
 	printf("\nprint = %d\n", printf("%3*t", 5, 6));
 	printf("\nmy print = %d\n\n", ft_printf("%3*t", 5, 6));*/
 
-}
+// }
 
 // int		main()
 // {

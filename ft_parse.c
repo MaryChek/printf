@@ -34,13 +34,15 @@ int		ft_pars_star_pres(t_type *type, int *val)
 {
 	
 	*val = va_arg(type->vl, int);
-	if (type->precision > -1)
+	if (type->dot && type->precision >= 0)
 		type->error++;
-	else
+	else if (!(type->precision < 0))
+	{
 		type->star_p++;
-	if (type->precision == -1)
 		type->precision = *val;
-	return (1);	
+	}
+	type->dot++;
+	return (1);
 }
 
 int		write_val(int *var, int star, int val, t_type *type)
