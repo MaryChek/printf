@@ -116,18 +116,68 @@ int		ft_printf(const char *format, ...)
 	return (i);
 }
 
-// int		main()
-// {
-// 	int a;
-// 	double special;
-// 	*((unsigned long *)(&special)) = 9218868437227405310;
+int		main()
+{
+	int a;
+	double special;
+	*((unsigned long *)(&special)) = 9218868437227405310;
 
-// 	printf("\n\nTEST 0\n\n");
+	// printf("\n\nTEST 0\n\n");
 
-// 	a = printf("ORIG_PRINT---->%.*i", -6, -3);
-// 	printf("|\nprint = %d(%d)\n\n", a, a - 15);
-// 	a = ft_printf("MY_PRINT------>%.*i", -6, -3);
-// 	printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+	a = printf("ORIG_PRINT---->%Lf", __LDBL_MAX__ - 100000000000000000000.0);
+	printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	a = ft_printf("MY_PRINT------>%Lf", __LDBL_MAX__ - 100000000000000000000.0);
+	printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 1\n\n");
+
+	// a = printf("ORIG_PRINT---->%#.x %#.0x", 0, 0);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%#.x %#.0x", 0, 0);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 2\n\n");
+	
+	// a = printf("ORIG_PRINT---->%- 15.8s %.0x", "ghjkjhgfghjk  ninimoni iomoiuhunoi", 0);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%- 15.8s %.0x", "ghjkjhgfghjk  ninimoni iomoiuhunoi", 0);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 3\n\n");
+	
+	// a = printf("ORIG_PRINT---->%#5.f %5.0x", 15480.588151, 0);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%#5.f %5.0x", 15480.588151, 0);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 4\n\n");
+	
+	// a = printf("ORIG_PRINT---->%.o %.0o", 0, 2651628);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%.o %.0o", 0, 2651628);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 5\n\n");
+	// char y = 'j';
+	// char *t = &y;
+	// a = printf("ORIG_PRINT---->%#5.p %5.0o", t, 0);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%#5.p %5.0o", t, 0);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 6\n\n");
+	
+	// a = printf("ORIG_PRINT---->%.d %.0d", 0, 0);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%.d %.0d", 0, 0);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
+
+	// printf("\n\nTEST 7\n\n");
+	
+	// a = printf("ORIG_PRINT---->%5.d %5.0d", 0, 0);
+	// printf("|\nprint = %d(%d)\n\n", a, a - 15);
+	// a = ft_printf("MY_PRINT------>%5.d %5.0d", 0, 0);
+	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
 
 	// printf("\n\nTEST 1\n\n");
 
@@ -178,22 +228,22 @@ int		ft_printf(const char *format, ...)
 	// a = ft_printf("MY_PRINT------>%5.d %5.0d", 0, 0);
 	// printf("|\nmy print = %d(%d)\n\n", a, a - 15);
 	
-	/*printf("\nprint = %d\n", printf("% ", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("% ", 5, 6));
-	printf("\nprint = %d\n", printf("%**3*d", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("%**3*d", 5, 6));
-	printf("\nprint = %d\n", printf("%*3*d", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("%*3*d", 5, 6));
-	printf("\nprint = %d\n", printf("%3*d", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("%3*d", 5, 6));
-	printf("\nprint = %d\n", printf("%**3*t", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("%**3*t", 5, 6));
-	printf("\nprint = %d\n", printf("%*3*t", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("%*3*t", 5, 6));
-	printf("\nprint = %d\n", printf("%3*t", 5, 6));
-	printf("\nmy print = %d\n\n", ft_printf("%3*t", 5, 6));*/
+	// printf("\nprint = %d\n", printf("% ", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("% ", 5, 6));
+	// printf("\nprint = %d\n", printf("%**3*d", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("%**3*d", 5, 6));
+	// printf("\nprint = %d\n", printf("%*3*d", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("%*3*d", 5, 6));
+	// printf("\nprint = %d\n", printf("%3*d", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("%3*d", 5, 6));
+	// printf("\nprint = %d\n", printf("%**3*t", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("%**3*t", 5, 6));
+	// printf("\nprint = %d\n", printf("%*3*t", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("%*3*t", 5, 6));
+	// printf("\nprint = %d\n", printf("%3*t", 5, 6));
+	// printf("\nmy print = %d\n\n", ft_printf("%3*t", 5, 6));
 
-// }
+}
 
 // int		main()
 // {

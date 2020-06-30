@@ -1,0 +1,29 @@
+p {line-height: 10%; font-size: 0.9vw;}
+h2 {line-height: 10%; font-size: 1vw;}
+body {
+    background: #ffff;
+    color: #000000;
+}
+.imag {
+    font-size: 0.9vw;
+    position: relative;
+    width: 100%;
+}
+.tab {
+    top: 200px;
+    position: absolute;
+    width: 100%;
+}
+td.Brown {background: #bb2e3d;}
+td.Blue {background: #18c5cd;}
+td.Yellow {background: #fce842;}
+td.Green {background: #27a338;}
+.imag {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.tab {
+    margin-left: auto;
+    margin-right: auto;
+}

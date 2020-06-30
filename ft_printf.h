@@ -37,7 +37,7 @@ typedef struct	s_float_param
 
 typedef struct	s_long_num
 {
-	int		num[140];
+	int		num[620];
 	char	real_size;
 	int		c_zero;
 	int		size_fst;

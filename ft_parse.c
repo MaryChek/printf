@@ -21,7 +21,7 @@ int		ft_pars_star_wid(t_type *type, int *val)
 	if (type->width)
 		type->error++;
 	else
-		type->star_w++;	
+		type->star_w++;
 	if  (!type->width && (type->width = *val) < 0)
 	{
 		type->f_minus = 1;
@@ -124,8 +124,7 @@ int		ft_parse_type(const char *format, t_type *type)
 	i = 0;
 	while (format[i] && !ft_type(&format[i]))
 	{
-		if (!ft_type(&format[i]))
-			i += ft_parse_format(&format[i], type);
+		i += ft_parse_format(&format[i], type);
 	}
 	if (!type->error && ft_type(&format[i]))
 	{

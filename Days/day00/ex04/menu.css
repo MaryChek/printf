@@ -1,0 +1,100 @@
+body{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: url("https://images.clipartlogo.com/files/istock/previews/9456/94560413-polka-dot-seamless-pattern-in-vintage-colors.jpg");
+    color: #0eefc0;
+}
+.menu>li{
+    display: inline-block;
+    padding: 8px 10px;
+}
+.menu>li>a{
+    padding: 16px 18px;
+}
+
+.menu>li:hover{
+    background: rgba(236, 112, 180, 0.84);
+    cursor: pointer;
+}
+.menu>li:last-child{
+    border: 0;
+}
+li{
+
+    list-style-type: none;
+}
+.menu{
+    padding: 8px 10px;
+    background: #c91850;
+    position: relative;
+    cursor: default;
+    display: inline-block;
+}
+.sub-menu-lvl-1{
+    display: none;
+    padding: 0px;
+    background: #c91850;
+    left: 0px;
+    width: 170px;
+    position: absolute;
+    top: 34px;
+}
+.sub-menu-lvl-1>li{
+    padding: 14px 0px;
+    border-bottom: 2px solid black;
+}
+.sub-menu-lvl-1>li:hover{
+    background: rgba(236, 112, 180, 0.84);
+}
+
+.sub-menu-lvl-1>li>.sub-menu{
+    cursor: pointer;
+}
+.sub-menu-lvl-1 a{
+    padding: 13px 45px;
+}
+
+
+.sub-menu-lvl-2{
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 170px;
+    left: 170px;
+    padding: 0;
+    background: #c91850;
+}
+.menu>li{
+    position: relative;
+    margin-left: 10px;
+}
+.sub-menu>a{
+    cursor: pointer;
+}
+.sub-menu:hover>.sub-menu-lvl-1{
+    display: block;
+}
+.del{
+    padding: 10px 0px;
+    border-right: 2px solid black;
+}
+.sub-menu-lvl-1>.sub-menu{
+
+    position: relative;
+}
+.sub-menu-lvl-1>.sub-menu:hover>.sub-menu-lvl-2{
+    display: block;
+}
+.sub-menu-lvl-2 a{
+    padding: 14px 37px;
+    cursor: pointer;
+}
+.sub-menu-lvl-2>li{
+    padding: 14px 0px;
+    border-bottom: 2px solid black;
+}
+.sub-menu-lvl-2>li:hover{
+    background: rgba(236, 112, 180, 0.84);
+}

@@ -14,7 +14,7 @@ void	init_array(t_long_num *p)
 	int		i;
 
 	i = -1;
-	while (++i < 100)
+	while (++i <= 620)
 		p->num[i] = 0; 
 	p->real_size = 0;
 	p->c_zero = 0;
