@@ -10,7 +10,8 @@ int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
     ft_creat_integ_part_num(&int_part, &float_p);
 	ft_creat_fract_part_num(&fr_part, &float_p);
 	type.precision = (type.precision < 0 || !type.dot) ? 6 : type.precision;
-	ft_roud_a_num(&int_part, &fr_part, float_p, type.precision);
+	if (fr_part.real_size != 0 && fr_part.num[0] != 0)
+		ft_roud_a_num(&int_part, &fr_part, float_p, type.precision);
 	print_int_and_fr_parts(int_part, fr_part, &type, float_p.exp);
 	return (type.print);
 }

@@ -3,20 +3,17 @@
 void	ft_creat_integ_part_num(t_long_num *int_p, t_float_param *float_p)
 {
 	int		i;
-	int l;
 
-	init_array(int_p);
 	i = 0;
+	init_array(int_p);
 	if (float_p->exp >= 0)
 	{
 		int_p->num[0] = 1;
 		while (i++ < (float_p->exp))
 		{
-			if (i == 16383)
-				l = 1;
 			mul_long_num(int_p, 0, 2, 0);
 			if (((float_p->bits >> float_p->bit) & 1) && i <= float_p->lst_mbit)
-				int_p->num[0] += 1;
+				sum_long_short(int_p, 0, 1);
 			float_p->bit--;
 		}
 	}

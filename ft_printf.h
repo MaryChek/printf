@@ -37,8 +37,8 @@ typedef struct	s_float_param
 
 typedef struct	s_long_num
 {
-	int		num[620];
-	char	real_size;
+	int		num[650];
+	int		real_size;
 	int		c_zero;
 	int		size_fst;
 	int		sign;
@@ -83,7 +83,7 @@ int				ft_print_float(t_float_param float_p, t_type type, int int_sign);
 void			ft_creat_integ_part_num(t_long_num *int_p, t_float_param *float_p);
 void			ft_creat_fract_part_num(t_long_num *fr_p, t_float_param *float_p);
 void			init_array(t_long_num *p);
-int				mul_long_num(t_long_num *p, int i, int value, int remain);
+void			mul_long_num(t_long_num *p, int i, int value, int remain);
 int				sum_long_num(t_long_num *p, int i, t_long_num value, int remain);
 int				sum_long_short(t_long_num *p, int i, int value);
 void			print_fract_array(t_long_num p, int exp, t_type *type);

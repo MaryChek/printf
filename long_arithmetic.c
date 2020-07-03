@@ -20,32 +20,41 @@ void	init_array(t_long_num *p)
 	p->c_zero = 0;
 }
 
-int		mul_long_num(t_long_num *p, int i, int value, int remain)
+void		mul_long_num(t_long_num *p, int i, int value, int remain)
 {
-	if ((p->num[i] *= value) >= MAX)
+	int next_rem;
+
+	while (i <= p->real_size)
 	{
-		p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
-		mul_long_num(p, i + 1, value, p->num[i] / MAX);
-		p->num[i] %= MAX;
+		if ((p->num[i] *= value) >= MAX)
+		{
+			p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
+			next_rem = p->num[i] / MAX;
+			p->num[i] %= MAX;
+		}
+		else if (p->real_size > i)
+				next_rem = 0;
+		p->num[i++] += remain;
+		remain = next_rem;
 	}
-	else if (p->real_size > i)
-			mul_long_num(p, i + 1, value, 0);
-	p->num[i] += remain;
-	return (1);
 }
 
 int		sum_long_num(t_long_num *p, int i, t_long_num value, int remain)
 {
-	if ((p->num[i] += value.num[i] + remain) >= MAX)
+	i--;
+	while (++i <= value.real_size || remain)
 	{
-		p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
-		sum_long_num(p, i + 1, value, p->num[i] / MAX);
-		p->num[i] %= MAX;
-	}
-	else if (value.real_size > i)
-	{
-		p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
-		sum_long_num(p, i + 1, value, 0);
+		if ((p->num[i] += value.num[i] + remain) >= MAX)
+		{
+			p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
+			remain = p->num[i] / MAX;
+			p->num[i] %= MAX;
+		}
+		else
+		{
+			p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
+			remain = 0;
+		}
 	}
 	return (1);
 }
