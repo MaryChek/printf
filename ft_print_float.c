@@ -27,14 +27,17 @@ void	ft_creat_fract_part_num(t_long_num *fr_p, t_float_param *float_p)
 
 	j = float_p->exp;
 	init_array(fr_p);
-	init_array(&i);
-	i.num[0] = 5;
-	while (++j <= float_p->lst_mbit)
+	if (float_p->min_exp < float_p->exp)
 	{
-		mul_long_num(fr_p, 0, 10, 0);
-		if (j >= 0 && (!j || ((float_p->bits >> (float_p->bit)--) & 1)))
-			sum_long_num(fr_p, 0, i, 0);
-		mul_long_num(&i, 0, 5, 0);
+		init_array(&i);
+		i.num[0] = 5;
+		while (++j <= float_p->lst_mbit)
+		{
+			mul_long_num(fr_p, 0, 10, 0);
+			if (j >= 0 && (!j || ((float_p->bits >> (float_p->bit)--) & 1)))
+				sum_long_num(fr_p, 0, i, 0);
+			mul_long_num(&i, 0, 5, 0);
+		}
 	}
 	fr_p->size_fst = ft_intlen(fr_p->num[fr_p->real_size]);
 }
@@ -64,11 +67,13 @@ int		ft_float_specifier(t_type type)
 
 	if (type.size == L_big)
 	{
+		fl_p.min_exp = -16382;
 		sign = ft_proc_bits_ldub(&fl_p, va_arg(type.vl, L_Dub));
 		return (ft_print_float(fl_p, type, sign));
 	}
 	else
 	{
+		fl_p.min_exp = -1023;
 		sign = ft_proc_bits_dub(&fl_p, va_arg(type.vl, double));
 		return (ft_print_float(fl_p, type, sign));
 	}

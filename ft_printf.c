@@ -111,12 +111,25 @@ int		ft_printf(const char *format, ...)
 		else
 			type.print += ft_print_n_char(1, format[i]);
 	va_end(type.vl);
-	i = type.error < 0 ? -1 : type.print;
 	ft_clean_struct(&type);
-	return (i);
+	return (type.print);
 }
 
-// int		main()
+// int		main() 
+
+
+//                       DISABLE_TEST:
+// notinsubject_moul_::G,D,e,a ;
+// bonus_notrequired_::g,e ;
+// bonus_moul_::e,g ;
+// bonus_::g,e ;
+// bonus_notrequired_f_reserved_values_::inf,ninf,nan ;
+// notinsubject_f_L_reserved_values_::inf,nan,ninf ;
+// argnum_notinsubject
+// notinsubject_moul_widechar
+
+
+
 // {
 // 	int a;
 // 	double special;

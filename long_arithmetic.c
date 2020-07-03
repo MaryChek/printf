@@ -52,7 +52,8 @@ int		sum_long_num(t_long_num *p, int i, t_long_num value, int remain)
 		}
 		else
 		{
-			p->real_size = (p->real_size < i + 1)  ? i + 1 : p->real_size;
+			if (value.real_size > i)
+				p->real_size = (p->real_size < i + 1) ? i + 1 : p->real_size;
 			remain = 0;
 		}
 	}
@@ -92,11 +93,12 @@ t_posit_to_round	ft_find_a_position_to_round(t_long_num fr_p, int exp, int preci
 	if (precision > size)
 	{
 		size = precision - size - 1;
-		p_i.regist = power(10, 7 - size % 8);
+		p_i.regist = 7 - size % 8;
 		p_i.ind = fr_p.real_size - size / 8 - 1;
 	}
 	else
-		p_i.regist = power(10, size - precision);
+		p_i.regist = size - precision;
+	p_i.pow_regst = power(10, p_i.regist);
 	return (p_i);
 }
 
@@ -117,25 +119,54 @@ int					ft_fr_count_zero(t_long_num fr_p, t_float_param fl_p)
 	return (count);
 }
 
-void				ft_roud_a_num(t_long_num *int_p, t_long_num *fr_p, t_float_param fl_p, int precision)
+void				ft_round()
+{
+		if (sum_long_short(fr_p, p_i.ind, p_i.pow_regst))
+		sum_long_short(int_p, 0, 1);
+	if (fr_p->size_fst < ft_intlen(fr_p->num[fr_p->real_size]))
+	{
+		if (fr_p->c_zero)
+			fr_p->c_zero--;
+		else
+			ft_lift_the_int_part(int_p, fr_p, p_i.pow_regst);
+	}
+}
+
+void				ft_round_a_num(t_long_num *int_p, t_long_num *fr_p, t_float_param fl_p, int precision)
 {
 	t_posit_to_round	p_i;
+	int					comparison;
+
+	// fr_p->c_zero = ft_fr_count_zero(*fr_p, fl_p);
+	// p_i = ft_find_a_position_to_round(*fr_p, fl_p.exp, precision);
+	// comparison = (int_p->num[int_p->real_size] % 2 == 0)? 6 : 5;
+	// if ((p_i.pow_regst == 1 && p_i.ind && (fr_p->num[p_i.ind - 1] / (MAX / 10)) % 10 >= 5)
+	// || (p_i.pow_regst > 1 && (fr_p->num[p_i.ind] / (p_i.pow_regst / 10)) % 10 >= 5))
+	// {
+	// 	ft_round();
+	// 	if (sum_long_short(fr_p, p_i.ind, p_i.pow_regst))
+	// 		sum_long_short(int_p, 0, 1);
+	// 	if (fr_p->size_fst < ft_intlen(fr_p->num[fr_p->real_size]))
+	// 	{
+	// 		if (fr_p->c_zero)
+	// 			fr_p->c_zero--;
+	// 		else
+	// 			ft_lift_the_int_part(int_p, fr_p, p_i.pow_regst);
+	// 	}
+	// }
 
 	fr_p->c_zero = ft_fr_count_zero(*fr_p, fl_p);
 	p_i = ft_find_a_position_to_round(*fr_p, fl_p.exp, precision);
-	if ((p_i.regist == 1 && p_i.ind &&
-			(fr_p->num[p_i.ind - 1] / (MAX / 10)) % 10 >= 5)
-	|| (p_i.regist > 1 &&
-			(fr_p->num[p_i.ind] / (p_i.regist / 10)) % 10 >= 5))
+	comparison = (int_p->num[int_p->real_size] % 2 == 0)? 6 : 5;
+	if (p_i.pow_regst == 1 && p_i.ind && (fr_p->num[p_i.ind - 1] / (MAX / 10)) % 10 >= 5)
+		ft_round(int_p, fr_p, p_i);
+	else if (p_i.pow_regst > 1)
 	{
-		if (sum_long_short(fr_p, p_i.ind, p_i.regist))
-			sum_long_short(int_p, 0, 1);
-		if (fr_p->size_fst < ft_intlen(fr_p->num[fr_p->real_size]))
-		{
-			if (fr_p->c_zero)
-				fr_p->c_zero--;
-			else
-				ft_lift_the_int_part(int_p, fr_p, p_i.regist);
-		}
+		if (p_i.ind == fr_p->real_size && fr_p->c_zero == 0 && fr_p->size_fst == p_i.regist && int_p->num[int_p->real_size] % 2 == 0)
+			comparison = 6;
+		else
+			comparison = 5;
+		if ((fr_p->num[p_i.ind] / (p_i.pow_regst / 10)) % 10 >= comparison)
+			ft_round(int_p, fr_p, p_i);
 	}
 }

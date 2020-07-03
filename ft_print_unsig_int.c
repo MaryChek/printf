@@ -66,7 +66,7 @@ int		print_unsig_precision(t_type *type, const ULL_int *elem, int base, int reg)
 	count = 0;
 	i = type->precision - type->length;
 	type->count_zero += (i > 0) ? i : 0;
-	if (!type->dot || type->precision > 0 || *elem || type->f_pointer)
+	if (!type->dot || type->precision != 0 || *elem || type->f_pointer)
 	{
 		if (type->f_pointer || (type->f_hash && (type->type == 'x' || type->type == 'X') && *elem))
 		{

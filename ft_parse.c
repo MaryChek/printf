@@ -133,7 +133,7 @@ int		ft_parse_type(const char *format, t_type *type)
 	}
 	if (!ft_type(&format[i]))
 		type->error = type->error ? 2 : -1;
-	if(i > 0)
+	if(i > 0 && type->error == 2)
 		type->error_array = ft_strsub(format, 0, i);
 	return (type->error == 1 ? -2 : --i);
 }
