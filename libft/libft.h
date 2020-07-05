@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 12:38:52 by rtacos            #+#    #+#             */
-/*   Updated: 2020/03/12 20:03:08 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/05 19:30:29 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char				*ft_itoa_base(LL_int value, int base, int num);
 char				*ft_itoa_unsig_base(ULL_int value, int base, int num, int reg);
 int					ft_atoi_base(const char *nbr, unsigned int base);
 size_t				ft_base_intlen(ULL_int n, int base);
-int					ft_put_n_line_char(char const *s, int n);
+int					ft_put_n_line_char(char const *s, int n, int fd);
+int					ft_power(int a, int i);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_float.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/04 20:25:13 by rtacos            #+#    #+#             */
+/*   Updated: 2020/07/04 21:24:13 by rtacos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_creat_integ_part_num(t_long_num *int_p, t_float_param *float_p)
@@ -42,7 +54,7 @@ void	ft_creat_fract_part_num(t_long_num *fr_p, t_float_param *float_p)
 	fr_p->size_fst = ft_intlen(fr_p->num[fr_p->real_size]);
 }
 
-int		ft_proc_bits_dub(t_float_param	*float_p, double elem)
+int		ft_proc_bits_dub(t_float_param *float_p, double elem)
 {
 	float_p->bits = *(__uint128_t *)(&elem);
 	float_p->exp = ((float_p->bits >> 52) & 0x7ff) - 1023;
@@ -51,7 +63,7 @@ int		ft_proc_bits_dub(t_float_param	*float_p, double elem)
 	return ((float_p->bits >> 63) & 1);
 }
 
-int		ft_proc_bits_ldub(t_float_param	*float_p, L_Dub elem)
+int		ft_proc_bits_ldub(t_float_param *float_p, t_l_dbl elem)
 {
 	float_p->bits = *(__uint128_t *)(&elem);
 	float_p->exp = ((float_p->bits >> 64) & 0x7fff) - 16383;
@@ -65,10 +77,10 @@ int		ft_float_specifier(t_type type)
 	t_float_param	fl_p;
 	int				sign;
 
-	if (type.size == L_big)
+	if (type.size == L_BIG)
 	{
 		fl_p.min_exp = -16382;
-		sign = ft_proc_bits_ldub(&fl_p, va_arg(type.vl, L_Dub));
+		sign = ft_proc_bits_ldub(&fl_p, va_arg(type.vl, t_l_dbl));
 		return (ft_print_float(fl_p, type, sign));
 	}
 	else

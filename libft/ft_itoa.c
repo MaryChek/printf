@@ -30,7 +30,7 @@ char	*ft_itoa(int n, int count_zero)
 		str[--max] = (i % 10) + 48;
 		i /= 10;
 	}
-    str[--max] = (i % 10) + 48;
+	str[--max] = (i % 10) + 48;
 	while (count_zero--)
 		str[--max] = '0';
 	if (n < 0)

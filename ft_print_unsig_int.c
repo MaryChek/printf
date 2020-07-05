@@ -1,42 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_unsig_int.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/04 20:25:29 by rtacos            #+#    #+#             */
+/*   Updated: 2020/07/05 20:04:57 by rtacos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int		ft_parse_base(int *base, char type)
-{
-	if (type == 'X')
-	{
-		*base = 16;
-		return (1);
-	}
-	else if (type == 'x')
-		*base = 16;
-	else if (type == 'o')
-		*base = 8;
-	else
-		*base = 10;
-	return (0);
-
-}
 int		ft_print_zero_elem(t_type *type)
 {
-	int count;
+	int		count;
 
 	count = 0;
 	if (type->type == 'o' && type->f_hash)
-		ft_print_n_char(1, '0');
-	else if (type->width && (type->type == 'o' || type->type == 'x' || type->type == 'X'))
-		ft_print_n_char(1, ' ');
+		ft_print_n_char(1, '0', type->fd);
+	else if (type->width && (type->type == 'o'
+	|| type->type == 'x' || type->type == 'X'))
+		ft_print_n_char(1, ' ', type->fd);
 	else if (type->f_plus || type->f_space || type->f_minus || type->f_null
-		|| (!type->f_plus && !type->f_space && !type->f_minus && type->width))
-			count += ft_print_n_char(1, type->f_plus ? '+' : ' ');
+	|| (!type->f_plus && !type->f_space && !type->f_minus && type->width))
+	{
+		if (type->f_plus)
+			count += ft_print_n_char(1, '+', type->fd);
+		else
+			count += ft_print_n_char(1, ' ', type->fd);
+	}
 	else
 		type->length = 0;
 	return (count);
 }
 
-int		print_unsig_spase(t_type *type, const ULL_int *elem)
+int		print_unsig_spase(t_type *type, const t_ull_int *elem)
 {
-	int i;
-	int count;
+	int		i;
+	int		count;
 
 	count = 0;
 	if (type->precision > type->length)
@@ -45,70 +47,71 @@ int		print_unsig_spase(t_type *type, const ULL_int *elem)
 		i = type->width - type->length;
 	if (i > 0)
 	{
-		if (type->f_pointer || (type->f_hash && (type->type == 'x' || type->type == 'X') && *elem))
+		if (type->f_pointer || (type->f_hash
+		&& (type->type == 'x' || type->type == 'X') && *elem))
 			i -= 2;
-		if (type->f_hash && type->type == 'o' && *elem && type->precision <= type->length)
+		if (type->f_hash && type->type == 'o' && *elem
+		&& type->precision <= type->length)
 			--i;
 		if ((!type->dot && type->f_null) && !type->f_minus)
-			type->count_zero += i;
+			type->cnt_zero += i;
 		else
-			count += ft_print_n_char(i, ' ');
+			count += ft_print_n_char(i, ' ', type->fd);
 	}
 	return (count > 0 ? count : 0);
 }
 
-int		print_unsig_precision(t_type *type, const ULL_int *elem, int base, int reg)
+int		print_precision(t_type *type, const t_ull_int *elem, int base, int reg)
 {
-	int i;
-	int count;
-	char *str;
+	int		i;
+	int		count;
+	char	*str;
 
 	count = 0;
 	i = type->precision - type->length;
-	type->count_zero += (i > 0) ? i : 0;
+	type->cnt_zero += (i > 0) ? i : 0;
 	if (!type->dot || type->precision != 0 || *elem || type->f_pointer)
 	{
-		if (type->f_pointer || (type->f_hash && (type->type == 'x' || type->type == 'X') && *elem))
+		if (type->f_pointer
+		|| (type->f_hash && (type->type == 'x' || type->type == 'X') && *elem))
 		{
-			type->type == 'x' ? write(1, "0x", 2) : write(1, "0X", 2);
+			write(type->fd, type->type == 'x' ? "0x" : "0X", 2);
 			count += 2;
 		}
-		else if (type->f_hash && type->type == 'o' && *elem && type->precision <= type->length)
-			count += ft_print_n_char(1, '0');
+		else if (type->f_hash && type->type == 'o'
+		&& *elem && type->precision <= type->length)
+			count += ft_print_n_char(1, '0', type->fd);
 		if (!type->f_pointer || *elem || type->precision || !type->dot)
-		{
-			ft_putstr_fd((str = ft_itoa_unsig_base(*elem, base, type->count_zero, reg)), 1);
-			ft_strdel(&str);
-		}
+			ft_print_using_num(elem, base, type, reg);
 	}
 	if (!*elem && !type->precision && type->dot)
 		ft_print_zero_elem(type);
-	return (count + type->count_zero);
+	return (count + type->cnt_zero);
 }
 
-int		ft_print_unsig(t_type type, ULL_int elem)
+int		ft_print_unsig(t_type type, t_ull_int elem)
 {
-	int count;
-	int base;
-	int reg;
+	int		count;
+	int		base;
+	int		reg;
 
 	count = 0;
 	reg = ft_parse_base(&base, type.type);
 	type.length = ft_base_intlen(elem, base);
 	if (type.f_minus)
 	{
-		count += print_unsig_precision(&type, &elem, base, reg);
+		count += print_precision(&type, &elem, base, reg);
 		count += print_unsig_spase(&type, &elem);
 	}
 	else
 	{
 		count += print_unsig_spase(&type, &elem);
-		count += print_unsig_precision(&type, &elem, base, reg);
+		count += print_precision(&type, &elem, base, reg);
 	}
 	return (count + type.length);
 }
 
-int		ft_unsig_specifier(t_type type, ULL_int elem)
+int		ft_unsig_specifier(t_type type, t_ull_int elem)
 {
 	if (type.size == H)
 		return (ft_print_unsig(type, (unsigned short)elem));

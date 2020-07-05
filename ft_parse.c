@@ -1,85 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/04 20:25:00 by rtacos            #+#    #+#             */
+/*   Updated: 2020/07/05 20:31:32 by rtacos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void	ft_parse_size(const char *format, t_type *type)
+int		ft_find_size(t_type *type, const char *format)
 {
-	if (format[0] == 'h' && format[1] != 'h')
-		type->size = H;
-	else if (format[0] == 'h' && format[1] == 'h')
-		type->size = HH;
-	else if (format[0] == 'l' && format[1] != 'l')
-		type->size = L;
-	else if (format[0] == 'l' && format[1] == 'l')
-		type->size = LL;
-	else if (format[0] == 'L')
-		type->size = L_big;
-}
+	int i;
 
-int		ft_pars_star_wid(t_type *type, int *val)
-{
-	
-	*val =  va_arg(type->vl, int);
-	if (type->width)
-		type->error++;
-	else
-		type->star_w++;
-	if  (!type->width && (type->width = *val) < 0)
-	{
-		type->f_minus = 1;
-		type->width *= -1;
-	}
-	return (1);	
-}
-
-int		ft_pars_star_pres(t_type *type, int *val)
-{
-	
-	*val = va_arg(type->vl, int);
-	if (type->dot && type->precision >= 0)
-		type->error++;
-	else if (!(type->precision < 0))
-	{
-		type->star_p++;
-		type->precision = *val;
-	}
-	type->dot++;
-	return (1);
-}
-
-int		write_val(int *var, int star, int val, t_type *type)
-{
-	if (star)
-		type->error = 2;
-	else
-		*var = val;
-	return (ft_intlen(val));
+	i = 0;
+	while (format[0] != type->sizes[i] && type->sizes[i])
+		++i;
+	if (type->sizes[i] != '\0')
+		ft_parse_size(&format[0], type);
+	return (ft_skip_size(type->size));
 }
 
 int		ft_modifier_processing(t_type *type, const char *format, int count_skip)
 {
 	int		val;
 
-	if (!type->dot && !type->star_w && format[0] == '*')
+	if (format[0] == '*')
 		return (ft_pars_star_wid(type, &val));
 	else if (!type->dot && (val = ft_atoi(&format[0])))
-		return (write_val(&type->width, type->star_w, val, type));
-	else if (format[0] == '.' || type->dot)
+		return (ft_intlen(type->width = val));
+	else if (format[0] == '.')
 	{
-		count_skip += ft_zero_skip(&format[type->dot ? 0 : 1]);
-		if (!type->star_p && format[type->dot ? 0 : 1] == '*')
+		count_skip += ft_zero_skip(&format[1]);
+		if (format[1] == '*')
 			return (ft_pars_star_pres(type, &val));
-		if ((val = ft_atoi(&(format[type->dot ? 0 : 1]))) > 0)
-			count_skip += write_val(&type->precision, type->star_p, val, type);
+		if ((val = ft_atoi(&(format[1]))) > 0)
+			count_skip += ft_intlen(type->precision = val);
 		type->dot++;
 	}
 	if (format[0] == 'l' || format[0] == 'L' || format[0] == 'h')
-	{
-		val = 0;
-		while (format[0] != type->sizes[val] && type->sizes[val])
-			++val;
-		if (type->sizes[val] != '\0')
-			ft_parse_size(&format[0], type);
-		count_skip += ft_skip_size(type->size);
-	}
+		count_skip += ft_find_size(type, format);
+	if (format[0] == '{')
+		count_skip += ft_parse_bonus_part(&format[0], type);
 	return (count_skip);
 }
 
@@ -105,35 +70,19 @@ int		ft_parse_format(const char *format, t_type *type)
 	return (count_skip);
 }
 
-int		ft_type(const char *format)
-{
-	if (*format == 'd' || *format == 'i' || *format == 'u' 
-		|| *format == 'o' || *format == 'x' || *format == 'X' 
-		|| *format == 'f' || *format == 'c' || *format == 'p'
-		 || *format == 'e' || *format == 'g' || *format == 's' 
-		|| *format == '%')
-		return (1);
-	else
-		return (0);
-}
-
 int		ft_parse_type(const char *format, t_type *type)
 {
 	int		i;
 
 	i = 0;
-	while (format[i] && !ft_type(&format[i]))
+	while (format[i] && !ft_is_type(&format[i]))
 	{
 		i += ft_parse_format(&format[i], type);
 	}
-	if (!type->error && ft_type(&format[i]))
+	if (format[i])
 	{
 		type->type = format[i];
 		return (i);
 	}
-	if (!ft_type(&format[i]))
-		type->error = type->error ? 2 : -1;
-	if(i > 0 && type->error == 2)
-		type->error_array = ft_strsub(format, 0, i);
-	return (type->error == 1 ? -2 : --i);
+	return (--i);
 }

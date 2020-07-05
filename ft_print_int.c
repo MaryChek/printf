@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_int.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/04 20:25:20 by rtacos            #+#    #+#             */
+/*   Updated: 2020/07/05 19:19:57 by rtacos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int		print_spase(t_type *type, const LL_int *elem)
+int		print_spase(t_type *type, const t_ll_int *elem)
 {
-	int i;
-	int count;
+	int		i;
+	int		count;
 
 	count = 0;
 	if (type->precision > type->length - (*elem < 0 ? 1 : 0))
@@ -17,44 +29,45 @@ int		print_spase(t_type *type, const LL_int *elem)
 		|| (*elem < 0 && (type->precision > (type->length - 1))))
 			i--;
 		if ((!type->dot && type->f_null) && !type->f_minus)
-			type->count_zero += i;
+			type->cnt_zero += i;
 		else
-			count += ft_print_n_char(i, ' ');
+			count += ft_print_n_char(i, ' ', type->fd);
 	}
 	return (count);
 }
 
-int		print_precision_and_elem(t_type *type, const LL_int *elem)
+int		print_precision_and_elem(t_type *type, const t_ll_int *elem)
 {
-	int i;
-	int count;
-	char *str;
+	int		i;
+	int		count;
+	char	*str;
 
 	count = 0;
 	i = type->precision - type->length + ((*elem < 0) ? 1 : 0);
 	if (*elem > 0 || ((type->precision || !type->dot) && !*elem))
 	{
 		if (type->f_plus)
-			count += ft_print_n_char(1, '+');
+			count += ft_print_n_char(1, '+', type->fd);
 		else if (type->f_space)
-			count += ft_print_n_char(1, ' ');
+			count += ft_print_n_char(1, ' ', type->fd);
 	}
 	if (i > 0)
-		type->count_zero += i;
+		type->cnt_zero += i;
 	if (!type->dot || type->precision || *elem)
 	{
-		ft_putstr_fd((str = ft_itoa_base(*elem, 10, type->count_zero)), 1);
+		ft_putstr_fd((str = ft_itoa_base(*elem, 10, type->cnt_zero)), type->fd);
 		ft_strdel(&str);
 	}
 	if (!*elem && !type->precision && type->dot)
-		if (type->f_plus || type->f_space || type->f_minus || type->f_null || (!type->f_plus && !type->f_space && !type->f_minus && type->width))
-			count += ft_print_n_char(1, type->f_plus ? '+' : ' ');
-	return (count + type->count_zero);
+		if (type->f_plus || type->f_space || type->f_minus || type->f_null
+		|| (!type->f_plus && !type->f_space && !type->f_minus && type->width))
+			count += ft_print_n_char(1, type->f_plus ? '+' : ' ', type->fd);
+	return (count + type->cnt_zero);
 }
 
-int		ft_print_int(t_type type, LL_int elem)
+int		ft_print_int(t_type type, t_ll_int elem)
 {
-	int count;
+	int		count;
 
 	count = 0;
 	type.length = ft_intlen(elem);
@@ -76,7 +89,7 @@ int		ft_print_int(t_type type, LL_int elem)
 		return (count);
 }
 
-int		ft_int_specifier(t_type type, LL_int elem)
+int		ft_int_specifier(t_type type, t_ll_int elem)
 {
 	if (type.size == H)
 		return (ft_print_int(type, (short)elem));

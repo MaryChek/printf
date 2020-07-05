@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int 	ft_put_n_line_char(char const *s, int n)
+int 	ft_put_n_line_char(char const *s, int n, int fd)
 {
     int i;
 
@@ -9,7 +9,7 @@ int 	ft_put_n_line_char(char const *s, int n)
 		while (*s && n--)
         {
             i++;
-			ft_putchar_fd(*s++, 1);
+			ft_putchar_fd(*s++, fd);
         }
     return (i);
 }

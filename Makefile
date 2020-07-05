@@ -2,7 +2,12 @@ NAME = libftprintf.a
 
 LIBFTA = libft.a
 
-SRCS = ft_print_float.c ft_printf.c long_arithmetic.c print_format.c ft_skip.c ft_parse.c ft_print_int.c ft_print_unsig_int.c print_function.c
+SRCS = ft_round_a_num.c help_fun_for_parse.c \
+	work_with_the_type_struct.c ft_print_float.c \
+	ft_printf.c long_arithmetic.c print_format.c \
+	ft_skip.c ft_parse.c ft_print_int.c \
+	ft_print_unsig_int.c print_function.c \
+	parse_bonus_part.c print_float_arrays.c
 
 OBJ = $(SRCS:.c=.o)
 
@@ -10,7 +15,7 @@ LIBDIR = libft/
 
 LIBNAME = libft/libft.a
 
-#CFLAGS = -Wall -Wextra -Werror$(CFLAGS)
+CFLAGS = -Wall -Wextra -Werror$(CFLAGS)
 
 all: $(NAME)
 
