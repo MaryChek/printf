@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   help_fun_for_parse.c                               :+:      :+:    :+:   */
+/*   help_func_for_parse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:59 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 15:47:39 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:57:51 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 void	ft_parse_size(const char *format, t_type *type)
 {

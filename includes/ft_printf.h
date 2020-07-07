@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:57 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 19:38:30 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:17:02 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <math.h>
-# include "libft/libft.h"
+# include "../srcs/libft/libft.h"
 
 typedef long long				t_ll_int;
 typedef unsigned long long		t_ull_int;
@@ -69,7 +69,7 @@ typedef struct	s_long_num
 	int			num[650];
 	int			real_size;
 	int			c_zero;
-	int			size_fst;
+	size_t		size_fst;
 	int			sign;
 }				t_long_num;
 
@@ -132,9 +132,9 @@ void			mul_long_num(t_long_num *p, int i, int value, int remain);
 int				sum_long_num(t_long_num *p, int i,
 										t_long_num value, int remain);
 int				sum_long_short(t_long_num *p, int i, int value);
-void			print_fract_array(t_long_num p, int exp, t_type *type);
+void			print_fract_array(t_long_num p, t_type *type);
 void			print_int_and_fr_parts(t_long_num in, t_long_num fr,
-													t_type *type, int exp);
+													t_type *type);
 void			ft_round_a_num(t_long_num *int_p, t_long_num *fr_p,
 										t_float_param fl_p, int precision);
 void			ft_print_long_elem(t_long_num p, t_type *type,

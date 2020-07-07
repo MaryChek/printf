@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:34 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 19:38:38 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:58:10 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 void	ft_create_typestruct(t_type *type)
 {

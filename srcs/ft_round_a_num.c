@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:16 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/04 21:22:17 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:09:33 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
-t_pos_to_round	find_a_pos_to_round(t_long_num fr_p, int exp, int precision)
+t_pos_to_round	find_a_pos_to_round(t_long_num fr_p, int precision)
 {
 	t_pos_to_round	p_i;
 	int				size;
@@ -69,7 +69,7 @@ void			ft_round_a_num(t_long_num *int_p, t_long_num *fr_p,
 	int				comparison;
 
 	fr_p->c_zero = ft_fr_count_zero(*fr_p, fl_p);
-	p_i = find_a_pos_to_round(*fr_p, fl_p.exp, precision);
+	p_i = find_a_pos_to_round(*fr_p, precision);
 	comparison = (int_p->num[int_p->real_size] % 2 == 0) ? 6 : 5;
 	if (p_i.pow_regst == 1 && p_i.ind
 				&& (fr_p->num[p_i.ind - 1] / (MAX / 10)) % 10 >= 5)
@@ -77,7 +77,7 @@ void			ft_round_a_num(t_long_num *int_p, t_long_num *fr_p,
 	else if (p_i.pow_regst > 1)
 	{
 		if (p_i.ind == fr_p->real_size && fr_p->c_zero == 0
-		&& fr_p->size_fst == p_i.regist
+		&& fr_p->size_fst == (size_t)p_i.regist
 		&& int_p->num[int_p->real_size] % 2 == 0)
 			comparison = 6;
 		else

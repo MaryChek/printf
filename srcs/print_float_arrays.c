@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:13 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/05 19:59:24 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:18:10 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int		ft_count_zero_in_int_part(t_long_num *in, t_type type, int first_size)
 {
@@ -46,7 +46,7 @@ void	ft_put_prefix_of_float(t_long_num *in, int index, t_type *type)
 		ft_print_n_char(1, '+', type->fd) : ft_print_n_char(1, ' ', type->fd);
 }
 
-void	print_fract_array(t_long_num p, int exp, t_type *type)
+void	print_fract_array(t_long_num p, t_type *type)
 {
 	char	*str;
 	int		size_num;
@@ -73,7 +73,7 @@ void	print_fract_array(t_long_num p, int exp, t_type *type)
 		ft_print_n_char(precition, '0', type->fd);
 }
 
-void	ft_print_long_num(t_long_num in, t_long_num fr, t_type *type, int exp)
+void	ft_print_long_num(t_long_num in, t_long_num fr, t_type *type)
 {
 	int		size_num;
 	int		ind_elem;
@@ -90,23 +90,23 @@ void	ft_print_long_num(t_long_num in, t_long_num fr, t_type *type, int exp)
 	if (type->precision || type->f_hash)
 		type->print += ft_print_n_char(1, '.', type->fd);
 	if (type->precision)
-		print_fract_array(fr, exp, type);
+		print_fract_array(fr, type);
 }
 
 void	print_int_and_fr_parts(t_long_num in, t_long_num fr,
-								t_type *type, int exp)
+								t_type *type)
 {
 	in.size_fst += in.sign ? 1 : 0;
 	if (type->f_minus)
 	{
 		ft_put_prefix_of_float(&in, in.real_size, type);
-		ft_print_long_num(in, fr, type, exp);
+		ft_print_long_num(in, fr, type);
 		type->print += ft_count_zero_in_int_part(&in, *type, in.size_fst);
 	}
 	else
 	{
 		type->print += ft_count_zero_in_int_part(&in, *type, in.size_fst);
 		ft_put_prefix_of_float(&in, in.real_size, type);
-		ft_print_long_num(in, fr, type, exp);
+		ft_print_long_num(in, fr, type);
 	}
 }

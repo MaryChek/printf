@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/04 20:28:02 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:57:48 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int		ft_skip_size(int size)
 {

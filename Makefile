@@ -2,9 +2,17 @@ NAME = libftprintf.a
 
 LIBFTA = libft.a
 
+PRINTF_H =	-I includes/
+
+LIBFT_H = 	-I srcs/libft/
+
+COMP =	gcc -Wall -Werror -Wextra $(PRINTF_H) $(LIBFT_H) -c -o
+
 SRC_DIR =	srcs/
 
 OBJ_DIR =	obj/
+
+LIB_DIR = srcs/libft/
 
 SRCS = ft_round_a_num.c help_func_for_parse.c \
 	work_with_the_type_struct.c ft_print_float.c \
@@ -13,37 +21,37 @@ SRCS = ft_round_a_num.c help_func_for_parse.c \
 	ft_print_unsig_int.c print_function.c \
 	parse_bonus_part.c print_float_arrays.c
 
-OBJ = $(SRCS:.c=.o)
+CFIND =	$(SRCS:%=$(SRC_DIR)%)
 
-OBJ =	$(addprefix $(OBJ_DIR), $(OBJ))
+OFILE =	$(SRCS:%.c=%.o)
 
-LIBDIR = libft/
-
-LIBNAME = libft/libft.a
-
-CFLAGS = -Wall -Wextra -Werror$(CFLAGS)
+OBJ =	$(addprefix $(OBJ_DIR), $(OFILE))
 
 all: $(OBJ_DIR) $(NAME)
-
-%.o: %.c
-	gcc  -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ) 
-	@make -C $(LIBDIR)
-	@cp libft/libft.a ./$(NAME)
-	ar rc $(NAME) $(addprefix $(OBJ_DIR),$(OBJ))
+	@make -C $(LIB_DIR)
+	@cp $(LIB_DIR)$(LIBFTA) .
+	@mv $(LIBFTA) $(NAME)
+	@ar rc $(NAME) $(addprefix $(OBJ_DIR),$(OFILE))
+
+$(OBJ): $(CFIND)
+		@$(MAKE) $(OFILE)
+
+$(OFILE):
+		@$(COMP) $(OBJ_DIR)$@ $(SRC_DIR)$(@:%.o=%.c)
 
 clean:
-	@/bin/rm -f $(OBJ_DIR)
-	@make -C $(LIBDIR) clean
+	@/bin/rm -rf $(OBJ_DIR)
+	@make -C $(LIB_DIR) clean
 	@echo OBJECTS FILES HAS BEEN DELETED.
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@make -C $(LIBDIR) fclean
+	@make -C $(LIB_DIR) fclean
 	@echo OBJECT FILES AND EXECUTABLE HAS BEEN DELETED.
 
 re: fclean all

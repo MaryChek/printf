@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:24 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/05 19:28:57 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:58:07 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int		ft_print_n_char(int num, char c, int fd)
 {

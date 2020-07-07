@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:18 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/05 19:23:34 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:15:51 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
 {
@@ -24,7 +24,7 @@ int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
 	type.precision = (type.precision < 0 || !type.dot) ? 6 : type.precision;
 	if (fr_part.real_size != 0 && fr_part.num[fr_part.real_size] != 0)
 		ft_round_a_num(&int_part, &fr_part, float_p, type.precision);
-	print_int_and_fr_parts(int_part, fr_part, &type, float_p.exp);
+	print_int_and_fr_parts(int_part, fr_part, &type);
 	return (type.print);
 }
 

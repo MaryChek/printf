@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:29 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 16:00:39 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:10:27 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int		ft_print_zero_elem(t_type *type)
 {
@@ -65,7 +65,6 @@ int		print_precision(t_type *type, const t_ull_int *elem, int base, int reg)
 {
 	int		i;
 	int		count;
-	char	*str;
 
 	count = 0;
 	i = type->precision - type->length;

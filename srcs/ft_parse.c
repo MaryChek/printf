@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:00 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 19:54:05 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:57:20 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int		ft_find_size(t_type *type, const char *format)
 {
