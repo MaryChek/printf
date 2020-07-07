@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 12:38:52 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/05 19:30:29 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/06 14:45:11 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n, int count_zero);
 void				ft_putendl(char const *s);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char const *s, int fd);
+int					ft_putchar_fd(char c, int fd);
+int					ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 int					ft_putnbr_fd(int n, int fd);
 

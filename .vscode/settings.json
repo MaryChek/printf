@@ -1,4 +1,11 @@
 {
 	"editor.renderWhitespace": "all",
-	"editor.insertSpaces": false
+	"editor.insertSpaces": false,
+	"files.associations": {
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
+	}
 }
