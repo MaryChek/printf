@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:16 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:09:33 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:55:27 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 t_pos_to_round	find_a_pos_to_round(t_long_num fr_p, int precision)
 {

@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:29:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 19:57:58 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:55:47 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int		print_color(char *color, int fd, int count)
 {

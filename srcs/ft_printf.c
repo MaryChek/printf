@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:39 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 19:57:39 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:55:24 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 void	error(int x, va_list vl)
 {

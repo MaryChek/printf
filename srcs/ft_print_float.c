@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:13 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 19:57:30 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:55:10 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 void	ft_creat_integ_part_num(t_long_num *int_p, t_float_param *float_p)
 {

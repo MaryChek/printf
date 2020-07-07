@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:18 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:15:51 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/07 20:55:58 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
 {
