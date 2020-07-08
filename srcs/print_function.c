@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:24 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:56:01 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:12:57 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		ft_put_space_for_str(char *elem, t_type type)
 	return (count);
 }
 
-void	ft_print_using_num(const ULL_int *elem, int base, t_type *type, int reg)
+void	ft_print_using_num(const t_ull_int *elem, int base,
+									t_type *type, int reg)
 {
 	char	*str;
 

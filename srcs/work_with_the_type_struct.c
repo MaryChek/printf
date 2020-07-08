@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:34 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:56:04 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 20:34:28 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_create_typestruct(t_type *type)
 	ft_type_cleaning(type);
 	type->print = 0;
 	type->fd = 1;
+	type->fall = 0;
 }
 
 void	ft_type_cleaning(t_type *type)

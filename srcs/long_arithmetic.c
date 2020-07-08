@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:07 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:55:36 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 20:17:46 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_array(t_long_num *p)
 	int		i;
 
 	i = -1;
-	while (++i <= 650)
+	while (++i < 650)
 		p->num[i] = 0;
 	p->real_size = 0;
 	p->c_zero = 0;
@@ -67,6 +67,7 @@ int		sum_long_short(t_long_num *p, int i, int value)
 {
 	int		num;
 
+	num = 0;
 	if ((p->num[i] += value) >= MAX)
 	{
 		num = p->num[i] / MAX;

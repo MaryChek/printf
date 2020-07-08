@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:16 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:55:27 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 20:26:51 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			ft_round_a_num(t_long_num *int_p, t_long_num *fr_p,
 								t_float_param fl_p, int precision)
 {
 	t_pos_to_round	p_i;
-	int				comparison;
+	int				comparison = 0;
 
 	fr_p->c_zero = ft_fr_count_zero(*fr_p, fl_p);
 	p_i = find_a_pos_to_round(*fr_p, precision);

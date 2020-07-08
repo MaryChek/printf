@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 12:38:52 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 14:45:11 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:19:59 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <string.h>
 # include <unistd.h>
 
-typedef long long LL_int;
-typedef unsigned long long ULL_int;
+typedef long long			t_ll_int;
+typedef unsigned long long	t_ull_int;
 
 typedef struct		s_list
 {
@@ -90,13 +90,14 @@ int					ft_putnbr_fd(int n, int fd);
 size_t				ft_word(const char *s, char c);
 size_t				ft_letter(const char *s, char c, size_t i);
 void				ft_freetg(char **tg, size_t w);
-size_t				ft_intlen(LL_int n);
+size_t				ft_intlen(t_ll_int n);
 void				ft_dellst(t_list **list);
 int					ft_strindch(char *str, char c);
-char				*ft_itoa_base(LL_int value, int base, int num);
-char				*ft_itoa_unsig_base(ULL_int value, int base, int num, int reg);
+char				*ft_itoa_base(t_ll_int value, int base, int num);
+char				*ft_itoa_unsig_base(t_ull_int value, int base,
+											int num, int reg);
 int					ft_atoi_base(const char *nbr, unsigned int base);
-size_t				ft_base_intlen(ULL_int n, int base);
+size_t				ft_base_intlen(t_ull_int n, int base);
 int					ft_put_n_line_char(char const *s, int n, int fd);
 int					ft_power(int a, int i);
 

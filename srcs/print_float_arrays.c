@@ -6,11 +6,12 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:13 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:56:37 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:12:04 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
 int		ft_count_zero_in_int_part(t_long_num *in, t_type type, int first_size)
 {
 	int		count;

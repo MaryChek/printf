@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:13 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:55:10 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 20:49:16 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ int		ft_float_specifier(t_type type)
 	t_float_param	fl_p;
 	int				sign;
 
+	fl_p.bit = 0;
+	fl_p.bits = 0;
+	fl_p.exp = 0;
+	fl_p.lst_mbit = 0;
 	if (type.size == L_BIG)
 	{
 		fl_p.min_exp = -16382;

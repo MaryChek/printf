@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:57 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:17:02 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 20:34:08 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct	s_type
 	int			cnt_zero;
 	int			dot;
 	int			fd;
-	int			color;
+	int			fall;
 }				t_type;
 
 void			ft_create_typestruct(t_type *type);

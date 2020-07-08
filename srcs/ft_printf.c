@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:39 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:55:24 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 20:47:07 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,16 @@ void	ft_print_format(t_type *type)
 
 int		ft_printf(const char *format, ...)
 {
-	t_type	type;
-	int		i;
+	t_type		type;
+	int			i;
 
 	i = -1;
 	va_start(type.vl, format);
 	ft_create_typestruct(&type);
 	while (format[++i])
-	{
-		if (format[i] == '{')
+		if (format[i] == '{' && !type.fall)
 			i += ft_parse_bonus_part(&format[i], &type);
-		else if (format[i] == '%')
+		else if (format[i] == '%' && !type.fall)
 		{
 			++i;
 			i += ft_parse_type(&format[i], &type);
@@ -60,8 +59,10 @@ int		ft_printf(const char *format, ...)
 			ft_type_cleaning(&type);
 		}
 		else
+		{
 			type.print += ft_print_n_char(1, format[i], type.fd);
-	}
+			type.fall = 0;
+		}
 	va_end(type.vl);
 	ft_del_struct(&type);
 	return (type.print);

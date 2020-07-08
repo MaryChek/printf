@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 18:11:24 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 18:12:11 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 16:54:13 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_intlen_base(LL_int value, int base)
+static int		ft_intlen_base(t_ll_int value, int base)
 {
 	int i;
 
@@ -36,7 +36,7 @@ static char		print_nbr(int value)
 	return (c);
 }
 
-char			*ft_itoa_base(LL_int value, int base, int num)
+char			*ft_itoa_base(t_ll_int value, int base, int num)
 {
 	char	*str;
 	int		count;

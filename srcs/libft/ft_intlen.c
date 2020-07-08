@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 15:59:14 by rtacos            #+#    #+#             */
-/*   Updated: 2020/03/12 17:15:08 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:19:00 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_intlen(LL_int n)
+size_t	ft_intlen(t_ll_int n)
 {
 	size_t	i;
 

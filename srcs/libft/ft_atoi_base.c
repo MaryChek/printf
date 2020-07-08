@@ -6,11 +6,11 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 17:57:12 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 19:08:04 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/08 16:09:14 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		in(char c, char max)
+static int		in(char c, char max)
 {
 	char	*s1;
 	char	*s2;
@@ -30,7 +30,7 @@ int		in(char c, char max)
 	return (-1);
 }
 
-char	max_nb(int base)
+static char		max_nb(int base)
 {
 	char *ar;
 
@@ -40,7 +40,7 @@ char	max_nb(int base)
 	return (ar[base - 11]);
 }
 
-int		ft_atoi(const char *nbr, char max, int base)
+static int		ft_atoi(const char *nbr, char max, int base)
 {
 	int i;
 	int r;
@@ -58,7 +58,7 @@ int		ft_atoi(const char *nbr, char max, int base)
 	return (r);
 }
 
-int		ft_atoi_base(const char *nbr, unsigned int base)
+int				ft_atoi_base(const char *nbr, unsigned int base)
 {
 	char	max;
 	int		res;
