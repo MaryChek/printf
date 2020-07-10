@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:57 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 20:34:08 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 15:57:59 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,25 @@ void			ft_type_cleaning(t_type *type);
 void			ft_del_struct(t_type *type);
 
 int				ft_parse_type(const char *format, t_type *type);
-int				ft_is_type(const char *format);
+int				ft_is_type(const char format);
 void			ft_parse_size(const char *format, t_type *type);
-int				ft_pars_star_wid(t_type *type, int *val);
-int				ft_pars_star_pres(t_type *type, int *val);
+int				ft_pars_star_wid(t_type *type);
+int				ft_pars_star_pres(t_type *type);
+int				ft_skip_size(int size);
+int				ft_zero_skip(const char *format);
 
-int				ft_print_int(t_type type, t_ll_int elem);
+int				ft_print_char(char elem, t_type type);
+
+int				ft_print_string(char *elem, t_type type);
+int				ft_put_space_for_str(char *elem, t_type type);
+
+int				ft_print_pointer(void *elem, t_type type);
+
 int				ft_int_specifier(t_type type, t_ll_int num);
+int				ft_print_int(t_type type, t_ll_int elem);
 
-int				ft_print_unsig(t_type type, t_ull_int elem);
 int				ft_unsig_specifier(t_type type, t_ull_int elem);
+int				ft_print_unsig(t_type type, t_ull_int elem);
 void			ft_print_using_num(const t_ull_int *elem, int base,
 												t_type *type, int reg);
 int				ft_parse_base(int *base, char type);
@@ -123,39 +132,26 @@ int				ft_proc_bits_ldub(t_float_param	*float_p,
 												t_l_dbl elem);
 int				ft_print_float(t_float_param float_p,
 									t_type type, int int_sign);
+void			init_array(t_long_num *p);
 void			ft_creat_integ_part_num(t_long_num *int_p,
 											t_float_param *float_p);
 void			ft_creat_fract_part_num(t_long_num *fr_p,
 											t_float_param *float_p);
-void			init_array(t_long_num *p);
 void			mul_long_num(t_long_num *p, int i, int value, int remain);
 int				sum_long_num(t_long_num *p, int i,
 										t_long_num value, int remain);
 int				sum_long_short(t_long_num *p, int i, int value);
-void			print_fract_array(t_long_num p, t_type *type);
-void			print_int_and_fr_parts(t_long_num in, t_long_num fr,
-													t_type *type);
 void			ft_round_a_num(t_long_num *int_p, t_long_num *fr_p,
 										t_float_param fl_p, int precision);
-void			ft_print_long_elem(t_long_num p, t_type *type,
+int				ft_print_long_elem(t_long_num p, int fd,
 										int index, int size_num);
-
-int				ft_print_char(char elem, t_type type);
-
-int				ft_print_string(char *elem, t_type type);
-int				ft_put_space_for_str(char *elem, t_type type);
-
-int				ft_print_pointer(void *elem, t_type type);
-
-int				ft_skip_size(int size);
-int				ft_zero_skip(const char *format);
-void			error(int x, va_list vl);
-
-int				ft_print_n_char(int num, char c, int fd);
-
-int				power(int a, int i);
+int				print_int_and_fr_parts(t_long_num in, t_long_num fr,
+													t_type type);
 
 int				ft_parse_bonus_part(const char *format, t_type *type);
+int				ft_print_n_char(int num, char c, int fd);
+int				power(int a, int i);
+void			error(int x, va_list vl);
 
 void			test_unsig_int_arg1(t_ull_int num);
 void			test_unsig_int_arg2(t_ull_int num);

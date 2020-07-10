@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:39 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 20:47:07 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 16:23:09 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,24 @@ void	error(int x, va_list vl)
 	exit(1);
 }
 
-void	ft_print_format(t_type *type)
+int		ft_print_format(t_type *type)
 {
 	if (type->type == 'd' || type->type == 'i')
-		type->print += ft_int_specifier(*type, va_arg(type->vl, t_ll_int));
+		return (ft_int_specifier(*type, va_arg(type->vl, t_ll_int)));
 	else if (type->type == 'u' || type->type == 'x' || type->type == 'X'
 	|| type->type == 'o')
-		type->print += ft_unsig_specifier(*type, va_arg(type->vl, t_ull_int));
+		return (ft_unsig_specifier(*type, va_arg(type->vl, t_ull_int)));
 	else if (type->type == 'f' || type->type == 'e' || type->type == 'g')
-		type->print = ft_float_specifier(*type);
+		return (ft_float_specifier(*type));
 	else if (type->type == 'c')
-		type->print += ft_print_char(va_arg(type->vl, int), *type);
+		return (ft_print_char(va_arg(type->vl, int), *type));
 	else if (type->type == '%')
-		type->print += ft_print_char('%', *type);
+		return (ft_print_char('%', *type));
 	else if (type->type == 's')
-		type->print += ft_print_string(va_arg(type->vl, char*), *type);
+		return (ft_print_string(va_arg(type->vl, char*), *type));
 	else if (type->type == 'p')
-		type->print += ft_print_pointer(va_arg(type->vl, void *), *type);
+		return (ft_print_pointer(va_arg(type->vl, void *), *type));
+	return (0);
 }
 
 int		ft_printf(const char *format, ...)
@@ -55,7 +56,7 @@ int		ft_printf(const char *format, ...)
 			++i;
 			i += ft_parse_type(&format[i], &type);
 			if (type.type != '0')
-				ft_print_format(&type);
+				type.print += ft_print_format(&type);
 			ft_type_cleaning(&type);
 		}
 		else

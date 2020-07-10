@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:59 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/07 20:55:33 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 13:27:55 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ void	ft_parse_size(const char *format, t_type *type)
 		type->size = Z;
 }
 
-int		ft_pars_star_wid(t_type *type, int *val)
+int		ft_pars_star_wid(t_type *type)
 {
-	*val = va_arg(type->vl, int);
-	if ((type->width = *val) < 0)
+	int val;
+
+	val = va_arg(type->vl, int);
+	if ((type->width = val) < 0)
 	{
 		type->f_minus = 1;
 		type->width *= -1;
@@ -39,23 +41,25 @@ int		ft_pars_star_wid(t_type *type, int *val)
 	return (1);
 }
 
-int		ft_pars_star_pres(t_type *type, int *val)
+int		ft_pars_star_pres(t_type *type)
 {
-	*val = va_arg(type->vl, int);
-	if (*val >= 0)
+	int val;
+
+	val = va_arg(type->vl, int);
+	if (val >= 0)
 	{
-		type->precision = *val;
+		type->precision = val;
 		type->dot++;
 	}
 	return (2);
 }
 
-int		ft_is_type(const char *format)
+int		ft_is_type(char format)
 {
-	if (*format == 'd' || *format == 'i' || *format == 'u'
-		|| *format == 'o' || *format == 'x' || *format == 'X'
-		|| *format == 'f' || *format == 'c' || *format == 'p'
-		|| *format == 's' || *format == '%')
+	if (format == 'd' || format == 'i' || format == 'u'
+		|| format == 'o' || format == 'x' || format == 'X'
+		|| format == 'f' || format == 'c' || format == 'p'
+		|| format == 's' || format == '%')
 		return (1);
 	else
 		return (0);

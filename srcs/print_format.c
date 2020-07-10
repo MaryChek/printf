@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:18 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 20:24:11 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 16:22:12 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int		ft_print_float(t_float_param float_p, t_type type, int int_sign)
 	type.precision = (type.precision < 0 || !type.dot) ? 6 : type.precision;
 	if (fr_part.real_size != 0 && fr_part.num[fr_part.real_size] != 0)
 		ft_round_a_num(&int_part, &fr_part, float_p, type.precision);
-	print_int_and_fr_parts(int_part, fr_part, &type);
-	return (type.print);
+	return (print_int_and_fr_parts(int_part, fr_part, type));
 }
 
 int		ft_print_char(char elem, t_type type)
@@ -61,7 +60,8 @@ int		ft_print_string(char *elem, t_type type)
 	char	*tmp;
 
 	count = 0;
-	tmp = (elem == NULL) ? ft_strdup("(null)\0") : elem;
+	if (!(tmp = (elem == NULL) ? ft_strdup("(null)\0") : elem))
+		error(1, type.vl);
 	str = (type.precision >= 0 && type.dot) ?
 	ft_strsub(tmp, 0, type.precision) : tmp;
 	if (type.f_minus)

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:27:24 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 17:12:57 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 14:50:25 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int		ft_print_n_char(int num, char c, int fd)
 	return (count);
 }
 
-void	ft_print_long_elem(t_long_num p, t_type *type,
+int		ft_print_long_elem(t_long_num p, int fd,
 								int index, int size_num)
 {
 	char	*str;
 
-	ft_putstr_fd((str = ft_itoa(p.num[index], p.c_zero)), type->fd);
+	ft_putstr_fd((str = ft_itoa(p.num[index], p.c_zero)), fd);
 	ft_memdel((void **)&str);
-	type->print += p.c_zero + size_num;
+	return (p.c_zero + size_num);
 }
 
 int		ft_put_space_for_str(char *elem, t_type type)

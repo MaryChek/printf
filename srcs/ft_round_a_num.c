@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:26:16 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 20:26:51 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 13:16:42 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,26 @@ void			ft_round_a_num(t_long_num *int_p, t_long_num *fr_p,
 								t_float_param fl_p, int precision)
 {
 	t_pos_to_round	p_i;
-	int				comparison = 0;
+	int				comparison;
 
 	fr_p->c_zero = ft_fr_count_zero(*fr_p, fl_p);
 	p_i = find_a_pos_to_round(*fr_p, precision);
-	comparison = (int_p->num[int_p->real_size] % 2 == 0) ? 6 : 5;
-	if (p_i.pow_regst == 1 && p_i.ind
-				&& (fr_p->num[p_i.ind - 1] / (MAX / 10)) % 10 >= 5)
-		ft_round(int_p, fr_p, p_i);
-	else if (p_i.pow_regst > 1)
+	if (p_i.ind >= 0)
 	{
-		if (p_i.ind == fr_p->real_size && fr_p->c_zero == 0
-		&& fr_p->size_fst == (size_t)p_i.regist
-		&& int_p->num[int_p->real_size] % 2 == 0)
-			comparison = 6;
-		else
-			comparison = 5;
-		if ((fr_p->num[p_i.ind] / (p_i.pow_regst / 10)) % 10 >= comparison)
+		comparison = (int_p->num[int_p->real_size] % 2 == 0) ? 6 : 5;
+		if (p_i.pow_regst == 1 && p_i.ind
+					&& (fr_p->num[p_i.ind - 1] / (MAX / 10)) % 10 >= 5)
 			ft_round(int_p, fr_p, p_i);
+		else if (p_i.pow_regst > 1)
+		{
+			if (p_i.ind == fr_p->real_size && fr_p->c_zero == 0
+			&& fr_p->size_fst == (size_t)p_i.regist
+			&& int_p->num[int_p->real_size] % 2 == 0)
+				comparison = 6;
+			else
+				comparison = 5;
+			if ((fr_p->num[p_i.ind] / (p_i.pow_regst / 10)) % 10 >= comparison)
+				ft_round(int_p, fr_p, p_i);
+		}
 	}
 }

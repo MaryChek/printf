@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 20:25:13 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 20:49:16 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/07/10 15:53:28 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		ft_proc_bits_ldub(t_float_param *float_p, t_l_dbl elem)
 	float_p->bits = *(__uint128_t *)(&elem);
 	float_p->exp = ((float_p->bits >> 64) & 0x7fff) - 16383;
 	float_p->bit = 62;
-	float_p->lst_mbit = 64;
+	float_p->lst_mbit = 63;
 	return ((float_p->bits >> 79) & 1);
 }
 
